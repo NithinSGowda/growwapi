@@ -1,0 +1,30 @@
+{
+  "name": "growwapi",
+  "version": "0.0.1",
+  "description": "NodeJS SDK for Groww trading APIs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NithinSGowda/growwapi.git"
+  },
+  "keywords": [
+    "Groww",
+    "API",
+    "trading",
+    "nse",
+    "bse",
+    "nifty",
+    "sensex",
+    "Nodejs",
+    "npm"
+  ],
+  "author": "Nithin S and Kokila K N",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/NithinSGowda/growwapi/issues"
+  },
+  "homepage": "https://github.com/NithinSGowda/growwapi#readme"
+}
