@@ -1,5 +1,5 @@
 export enum Product {
-  Cnc = 'CNC',
-  Mis = 'MIS',
-  Nrml = 'NRML',
+  CNC = 'CNC',
+  MIS = 'MIS',
+  NRML = 'NRML',
 }

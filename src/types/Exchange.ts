@@ -1,4 +1,4 @@
 export enum Exchange {
-  Bse = 'BSE',
-  Nse = 'NSE',
+  BSE = 'BSE',
+  NSE = 'NSE',
 }
