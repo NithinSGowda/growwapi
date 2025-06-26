@@ -6,6 +6,8 @@ import { Orders } from './resources/order';
 import { Positions } from './resources/positions';
 import { Users } from './resources/users';
 
+export * from './types';
+
 export class GrowwAPI {
   public users: Users;
   public position: Positions;

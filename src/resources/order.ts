@@ -7,7 +7,7 @@ import { GetTradesParams } from '../types/GetTradesParams';
 import { StatusParams } from '../types/StatusParams';
 import { StatusByReferenceParams } from '../types/StatusByReferenceParams';
 import { ListParams } from '../types/ListParams';
-import { GetParams } from '../types/GetParms';
+import { GetParams } from '../types/GetParams';
 
 export class Orders {
   private http: HttpClient;
@@ -54,6 +54,6 @@ export class Orders {
 
   async get(params: GetParams) {
     const query = params ? '?' + new URLSearchParams(params as any).toString() : '';
-    return this.http.get(`/detail/${params.groww_order_id}${query}`);
+    return this.http.get(`/detail/${params.growwOrderId}${query}`);
   }
 }
