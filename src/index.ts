@@ -7,6 +7,8 @@ import { Positions } from './resources/positions';
 
 export * from './types';
 
+export * from './types';
+
 export class GrowwAPI {
   public position: Positions;
   public holdings: Holdings;
