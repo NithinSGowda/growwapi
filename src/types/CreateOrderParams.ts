@@ -6,7 +6,7 @@ import { Segment } from './Segment';
 import { TransactionType } from './TransactionType';
 import { Validity } from './Validity';
 
-export interface CreateParams extends BaseParams {
+export interface CreateOrderParams extends BaseParams {
     exchange: Exchange;
     orderType: OrderType;
     product: Product;

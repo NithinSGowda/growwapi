@@ -4,12 +4,10 @@ import { Holdings } from './resources/holdings';
 import { Margins } from './resources/margins';
 import { Orders } from './resources/order';
 import { Positions } from './resources/positions';
-import { Users } from './resources/users';
 
 export * from './types';
 
 export class GrowwAPI {
-  public users: Users;
   public position: Positions;
   public holdings: Holdings;
   public auth: Auth;
@@ -17,7 +15,6 @@ export class GrowwAPI {
   public margins: Margins;
 
   constructor(baseUrl = API_URL) {
-    this.users = new Users(baseUrl);
     this.position = new Positions(baseUrl);
     this.holdings = new Holdings(baseUrl);
     this.auth = new Auth();
