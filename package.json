@@ -2,13 +2,16 @@
   "name": "growwapi",
   "version": "0.0.5",
   "description": "NodeJS SDK for Groww trading APIs",
-  "main": "src/index.js",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
   "types": "dist/types/index.d.ts",
   "files": ["dist"],
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && npm run build:esm",
+    "build:esm": "tsc -p tsconfig.esm.json",
     "dev": "ts-node src/index.ts",
     "test": "jest",
+    "lint": "eslint src --ext .ts",
     "prepare": "npm run build"
   },
   "repository": {
