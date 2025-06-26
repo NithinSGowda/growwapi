@@ -6,7 +6,7 @@ import { Orders } from './resources/order';
 import { Positions } from './resources/positions';
 import { Users } from './resources/users';
 
-export class APIClient {
+export class GrowwAPI {
   public users: Users;
   public position: Positions;
   public holdings: Holdings;
