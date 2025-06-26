@@ -40,10 +40,10 @@ GROWW_API_SECRET=your_api_secret
 ```typescript
 import { GrowwAPI } from 'growwapi';
 
-const client = new GrowwAPI;
+const client = new GrowwAPI();
 
 // Fetch user holdings
-const holdings = await Groww.holdings.list();
+const holdings = await client.holdings.list();
 console.log(holdings);
 
 // Create an order
