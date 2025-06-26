@@ -7,7 +7,7 @@ import { GetOrderParams } from '../types/GetOrderParams';
 import { ListOrderParams } from '../types/ListOrderParams';
 import { ModifyOrderParams } from '../types/ModifyOrderParams';
 import { OrderStatusParams } from '../types/OrderStatusParams';
-import { OrderStatusByReferenceParams } from '../types/StatusByReferenceParams';
+import { OrderStatusByReferenceParams } from '../types/OrderStatusByReferenceParams';
 
 export class Orders {
   private http: HttpClient;
