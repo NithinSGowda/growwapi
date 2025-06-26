@@ -1,0 +1,27 @@
+# Don't include source TS files
+src/
+*.ts
+*.tsx
+
+# Build tools & configs
+tsconfig.json
+tsconfig.*.json
+.eslintrc.js
+.prettierrc
+.vscode/
+babel.config.js
+jest.config.js
+
+# Dev/test files
+tests/
+coverage/
+*.test.ts
+*.spec.ts
+
+# Misc
+node_modules/
+dist/**/*.map
+.env
+.npmignore
+.gitignore
+.DS_Store
