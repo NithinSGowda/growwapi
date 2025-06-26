@@ -1,6 +1,6 @@
 {
   "name": "growwapi",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "NodeJS SDK for Groww trading APIs",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -48,6 +48,7 @@
     "typescript-eslint": "^8.34.1"
   },
   "dependencies": {
+    "dayjs": "^1.11.13",
     "nats": "^2.29.3",
     "nats.ws": "^1.30.3",
     "otpauth": "^9.4.0",

@@ -1,6 +1,7 @@
 import { TradingSymbolParams } from '../types/TradingSymbolParams';
 import { UserParams } from '../types/UserParams';
 import { HttpClient } from '../utils/http';
+import { buildUrlWithParams } from '../utils/url';
 
 export class Positions {
   private http: HttpClient;
@@ -10,13 +11,13 @@ export class Positions {
   }
 
   async user(params: UserParams) {
-    const query = params ? '?' + new URLSearchParams(params as any).toString() : '';
-    return this.http.get(`/user${query}`);
+    const url = buildUrlWithParams('/user', params);
+    return this.http.get(url);
   }
 
   async tradingSymbol(params: TradingSymbolParams) {
-    const query = params ? '?' + new URLSearchParams(params as any).toString() : '';
-    return this.http.get(`/trading-symbol${query}`);
+    const url = buildUrlWithParams('/trading-symbol', params);
+    return this.http.get(url);
   }
 
 }

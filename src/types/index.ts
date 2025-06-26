@@ -20,3 +20,4 @@ export * from './TradingSymbolParams';
 export * from './TransactionType';
 export * from './UserParams';
 export * from './Validity';
+export * from './InstructionsType';

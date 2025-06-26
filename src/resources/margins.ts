@@ -1,5 +1,7 @@
+import snakecaseKeys from 'snakecase-keys';
 import { RequiredForOrderParams } from '../types/RequiredForOrderParams';
 import { HttpClient } from '../utils/http';
+import { buildUrlWithParams } from '../utils/url';
 
 export class Margins {
   private http: HttpClient;
@@ -13,6 +15,6 @@ export class Margins {
   }
 
   async requiredForOrder(params: RequiredForOrderParams) {
-    return this.http.post(`/detail/orders?segment=${params.segment}`,params);
+    return this.http.post(buildUrlWithParams('/detail/orders', params),snakecaseKeys(params));
   }
 }

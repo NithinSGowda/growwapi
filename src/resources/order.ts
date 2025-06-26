@@ -8,6 +8,7 @@ import { ListOrderParams } from '../types/ListOrderParams';
 import { ModifyOrderParams } from '../types/ModifyOrderParams';
 import { OrderStatusParams } from '../types/OrderStatusParams';
 import { OrderStatusByReferenceParams } from '../types/OrderStatusByReferenceParams';
+import { buildUrlWithParams } from '../utils/url';
 
 export class Orders {
   private http: HttpClient;
@@ -33,27 +34,27 @@ export class Orders {
   }
 
   async getTrades(params: GetTradesParams) {
-    const query = params ? '?' + new URLSearchParams(params as any).toString() : '';
-    return this.http.get(`/trades/${params.growwOrderId}${query}`);
+    const url = buildUrlWithParams(`/trades/${params.growwOrderId}`, params);
+    return this.http.get(url);
   }
 
   async status(params: OrderStatusParams) {
-    const query = params ? '?' + new URLSearchParams(params as any).toString() : '';
-    return this.http.get(`/status/${params.growwOrderId}${query}`);
+    const url = buildUrlWithParams(`/status/${params.growwOrderId}`, params);
+    return this.http.get(url);
   }
 
   async statusByReferenceID(params: OrderStatusByReferenceParams) {
-    const query = params ? '?' + new URLSearchParams(params as any).toString() : '';
-    return this.http.get(`/status/${params.orderReferenceId}${query}`);
+    const url = buildUrlWithParams(`/status/${params.orderReferenceId}`, params);
+    return this.http.get(url);
   }
 
   async list(params: ListOrderParams) {
-    const query = params ? '?' + new URLSearchParams(params as any).toString() : '';
-    return this.http.get(`/list${query}`);
+    const url = buildUrlWithParams('/list', params);
+    return this.http.get(url);
   }
 
   async get(params: GetOrderParams) {
-    const query = params ? '?' + new URLSearchParams(params as any).toString() : '';
-    return this.http.get(`/detail/${params.growwOrderId}${query}`);
+    const url = buildUrlWithParams(`/detail/${params.growwOrderId}`, params);
+    return this.http.get(url);
   }
 }
