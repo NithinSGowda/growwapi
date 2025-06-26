@@ -1,9 +1,10 @@
 {
   "name": "growwapi",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "NodeJS SDK for Groww trading APIs",
-  "main": "index.js",
-  "types": "dist/index.d.ts",
+  "main": "src/index.js",
+  "types": "dist/types/index.d.ts",
+  "files": ["dist"],
   "scripts": {
     "build": "tsc",
     "dev": "ts-node src/index.ts",
