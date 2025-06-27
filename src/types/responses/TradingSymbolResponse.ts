@@ -1,5 +1,4 @@
 export interface TradingSymbolResponse {
-    trading_symbol: string;
     segment: string;
     credit_quantity: number;
     credit_price: number;

@@ -11,7 +11,7 @@ import { Positions } from './resources/positions';
 export * from './types';
 
 export class GrowwAPI {
-  public position: Positions;
+  public positions: Positions;
   public holdings: Holdings;
   public auth: Auth;
   public orders: Orders;
@@ -21,7 +21,7 @@ export class GrowwAPI {
   public historicData: HistoricData;
 
   constructor(baseUrl = API_URL) {
-    this.position = new Positions(baseUrl);
+    this.positions = new Positions(baseUrl);
     this.holdings = new Holdings(baseUrl);
     this.auth = new Auth();
     this.orders = new Orders(baseUrl);

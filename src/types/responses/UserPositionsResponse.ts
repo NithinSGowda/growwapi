@@ -1,5 +1,4 @@
 export interface UserPositionsResponse {
-    status: string;
     trading_symbol: string;
     segment: string;
     credit_quantity: number;

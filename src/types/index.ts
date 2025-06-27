@@ -7,7 +7,7 @@ export * from './Exchange';
 export * from './GetOrderParams';
 export * from './GetTradesParams';
 export * from './InstrumentType';
-export * from './ListOrderParams';
+export * from './DetailOrderParams';
 export * from './ModifyOrderParams';
 export * from './OrderStatus';
 export * from './OrderType';

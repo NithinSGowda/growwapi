@@ -1,6 +1,7 @@
 export interface OrderStatusResponse {
-    orderId: string;
-    status: string;
-    details?: Record<string, unknown>;
-    [key: string]: unknown;
+    groww_order_id: string;
+    order_status: string;
+    remark: string;
+    filled_quantity: number;
+    order_reference_id: string;
 }

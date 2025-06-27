@@ -14,12 +14,12 @@ export class Positions {
 
   async user(params: UserParams): Promise<UserPositionsResponse> {
     const url = buildUrlWithParams('/user', params);
-    return this.http.get(url);
+    return (await this.http.get(url)) as UserPositionsResponse;
   }
 
   async tradingSymbol(params: TradingSymbolParams): Promise<TradingSymbolResponse> {
     const url = buildUrlWithParams('/trading-symbol', params);
-    return this.http.get(url);
+    return await this.http.get(url) as TradingSymbolResponse;
   }
 
 }

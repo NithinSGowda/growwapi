@@ -1,6 +1,4 @@
 export interface ModifyOrderResponse {
-    orderId: string;
-    status: string;
-    message?: string;
-    [key: string]: unknown;
+    groww_order_id: string;
+    order_status: string;
 }

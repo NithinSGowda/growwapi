@@ -4,7 +4,7 @@ import { CreateOrderParams } from '../types/CreateOrderParams';
 import { GetTradesParams } from '../types';
 import { CancelOrderParams } from '../types/CancelOrderParams';
 import { GetOrderParams } from '../types/GetOrderParams';
-import { ListOrderParams } from '../types/ListOrderParams';
+import { DetailsOrderParams } from '../types/DetailOrderParams';
 import { ModifyOrderParams } from '../types/ModifyOrderParams';
 import { OrderStatusParams } from '../types/OrderStatusParams';
 import { OrderStatusByReferenceParams } from '../types/OrderStatusByReferenceParams';
@@ -14,9 +14,7 @@ import { ModifyOrderResponse } from '../types/responses/ModifyOrderResponse';
 import { CancelOrderResponse } from '../types/responses/CancelOrderResponse';
 import { GetTradesResponse } from '../types/responses/GetTradesResponse';
 import { GetOrderResponse } from '../types/responses/GetOrderResponse';
-import { ListOrderResponse } from '../types/responses/ListOrderResponse';
 import { OrderStatusResponse } from '../types/responses/OrderStatusResponse';
-import { OrderStatusByReferenceResponse } from '../types/responses/OrderStatusByReferenceResponse';
 
 export class Orders {
   private http: HttpClient;
@@ -26,43 +24,42 @@ export class Orders {
   }
 
   async create(params: CreateOrderParams): Promise<CreateOrderResponse> {
-    return this.http.post('/create',
-      snakecaseKeys(params)
-    );
+    return await this.http.post('/create',
+      snakecaseKeys(params)) as CreateOrderResponse;
   }
 
   async modify(params: ModifyOrderParams): Promise<ModifyOrderResponse> {
-    return this.http.post('/modify',
-      snakecaseKeys(params));
+    return await this.http.post('/modify',
+      snakecaseKeys(params)) as ModifyOrderResponse;
   }
 
   async cancel(params: CancelOrderParams): Promise<CancelOrderResponse> {
-    return this.http.post('/cancel',
-      snakecaseKeys(params));
+    return await this.http.post('/cancel',
+      snakecaseKeys(params)) as CancelOrderResponse;
   }
 
   async getTrades(params: GetTradesParams): Promise<GetTradesResponse> {
     const url = buildUrlWithParams(`/trades/${params.growwOrderId}`, params);
-    return this.http.get(url);
-  }
-
-  async getOrder(params: GetOrderParams): Promise<GetOrderResponse> {
-    const url = buildUrlWithParams('/get', params);
-    return this.http.get(url);
-  }
-
-  async list(params: ListOrderParams): Promise<ListOrderResponse> {
-    const url = buildUrlWithParams('/list', params);
-    return this.http.get(url);
+    return (await this.http.get(url)).trade_list as GetTradesResponse;
   }
 
   async status(params: OrderStatusParams): Promise<OrderStatusResponse> {
-    const url = buildUrlWithParams('/status', params);
-    return this.http.get(url);
+    const url = buildUrlWithParams(`/status/${params.growwOrderId}`, params);
+    return await this.http.get(url) as OrderStatusResponse;
   }
 
-  async statusByReference(params: OrderStatusByReferenceParams): Promise<OrderStatusByReferenceResponse> {
-    const url = buildUrlWithParams('/status-by-reference', params);
-    return this.http.get(url);
+  async statusByReference(params: OrderStatusByReferenceParams): Promise<OrderStatusResponse> {
+    const url = buildUrlWithParams(`/reference/${params.orderReferenceId}`, params);
+    return await this.http.get(url) as OrderStatusResponse;
+  }
+
+  async getOrders(params: GetOrderParams): Promise<GetOrderResponse> {
+    const url = buildUrlWithParams('/list', params);
+    return (await this.http.get(url)).order_list as GetOrderResponse;
+  }
+
+  async Details(params: DetailsOrderParams): Promise<GetOrderResponse> {
+    const url = buildUrlWithParams(`/detail/${params.growwOrderId}`, params);
+    return await this.http.get(url) as GetOrderResponse;
   }
 }
