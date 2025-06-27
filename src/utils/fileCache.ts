@@ -3,13 +3,10 @@ import fsPromises from 'fs/promises';
 import path from 'path';
 import os from 'os';
 import crypto from 'crypto';
-
-type CachedCSVResult = {
-  filePath: string;
-  fromCache: boolean;
-};
+import { CachedCSVResult } from '../types/CachedCSVResult';
 
 const CACHE_FOLDER = 'csv-cache';
+const memoryCache: Record<string, string> = {};
 
 function getCacheFilePath(url: string): string {
   const hash = crypto.createHash('md5').update(url).digest('hex');
@@ -40,7 +37,6 @@ async function deleteFileIfExists(filePath: string): Promise<void> {
   }
 }
 
-
 async function downloadCSVToFile(url: string, filePath: string): Promise<void> {
   const response = await fetch(url);
   if (!response.ok || !response.body) {
@@ -59,7 +55,6 @@ async function downloadCSVToFile(url: string, filePath: string): Promise<void> {
   writer.end();
 }
 
-
 export async function fetchCSV(url: string, ttl: number = 86400000): Promise<CachedCSVResult> {
   const cacheFile = getCacheFilePath(url);
   await ensureCacheDir(cacheFile);
@@ -67,11 +62,19 @@ export async function fetchCSV(url: string, ttl: number = 86400000): Promise<Cac
   const validCache = await isCacheValid(cacheFile, ttl);
 
   if (validCache) {
-    return { filePath: cacheFile, fromCache: true };
+    if (memoryCache[cacheFile]) {
+      return { fileContent: memoryCache[cacheFile] };
+    } else {
+      const fileContent = await fsPromises.readFile(cacheFile, 'utf-8');
+      memoryCache[cacheFile] = fileContent;
+      return { fileContent };
+    }
   }
 
   await deleteFileIfExists(cacheFile);
   await downloadCSVToFile(url, cacheFile);
+  const fileContent = await fsPromises.readFile(cacheFile, 'utf-8');
+  memoryCache[cacheFile] = fileContent;
 
-  return { filePath: cacheFile, fromCache: false };
+  return { fileContent };
 }

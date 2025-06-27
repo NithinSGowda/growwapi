@@ -1,4 +1,5 @@
 import { Auth } from '../resources/auth';
+import { BaseResponse } from '../types/responses/BaseResponse';
 
 export class HttpClient {
   constructor(
@@ -14,7 +15,7 @@ export class HttpClient {
     const res = await fetch(this.url(path), {
       headers: await this.headers()
     });
-    return this.handleResponse(res);
+    return (await this.handleResponse(res) as BaseResponse).payload;
   }
 
   async post(path: string, body: any) {
@@ -23,7 +24,7 @@ export class HttpClient {
       headers: await this.headers(),
       body: JSON.stringify(body)
     });
-    return this.handleResponse(res);
+    return (await this.handleResponse(res) as BaseResponse).payload;
   }
 
   private async headers() {

@@ -1,7 +1,7 @@
 export enum InstrumentType {
-  Eq = 'EQ',
-  Idx = 'IDX',
-  Fut = 'FUT',
-  Ce = 'CE',
-  Pe = 'PE',
+  EQ = 'EQ',
+  IDX = 'IDX',
+  FUT = 'FUT',
+  CE = 'CE',
+  PE = 'PE',
 }

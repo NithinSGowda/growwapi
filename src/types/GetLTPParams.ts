@@ -3,5 +3,5 @@ import { Segment } from './Segment';
 
 export interface GetLTPParams extends BaseParams {
     segment: Segment;
-    exchangeSymbols: string;
+    exchangeSymbols: string[];
 }
