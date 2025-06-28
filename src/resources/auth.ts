@@ -17,10 +17,6 @@ export class Auth {
       return currentTokenRequest;
     }
 
-    if (!process.env.GROWW_API_KEY || !process.env.GROWW_API_SECRET) {
-      throw new Error('GROWW_API_KEY and GROWW_API_SECRET must be set in environment variables');
-    }
-
     currentTokenRequest = (async () => {
       const response = await Auth.createAccessToken();
       if (!response.ok) {

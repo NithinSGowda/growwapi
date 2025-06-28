@@ -45,7 +45,7 @@ export class Orders {
     return (await this.http.get(url)).order_list as OrderResponse[];
   }
 
-  async Details(params: OrderDetailsParams): Promise<OrderResponse> {
+  async details(params: OrderDetailsParams): Promise<OrderResponse> {
     const url = buildUrlWithParams(`/detail/${params.growwOrderId}`, params);
     return await this.http.get(url) as OrderResponse;
   }
