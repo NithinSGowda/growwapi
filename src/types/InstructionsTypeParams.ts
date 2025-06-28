@@ -4,8 +4,9 @@ import { Segment } from './Segment';
 
 export interface InstructionsTypeParams extends BaseParams {
     exchange?: Exchange;
-    segment?: Segment;
+    exhangeToken?: number;
     tradingSymbol?: string;
+    segment?: Segment;
     growwSymbol?: string;
     name?: string;
     instrumentType?: string;
@@ -13,9 +14,9 @@ export interface InstructionsTypeParams extends BaseParams {
     isin?: string;
     underlyingSymbol?: string;
     underlyingExchangeToken?: number;
-    lotSize?: number;
     expiryDate?: string | number;
     strikePrice?: number;
+    lotSize?: number;
     tickSize?: number;
     freezeQuantity?: number;
     isReserved?: boolean;
