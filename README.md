@@ -11,6 +11,7 @@ NodeJS SDK for Groww trading APIs
 
 ## Features
 
+- **Live Feed**: Real-time data streaming for market prices.
 - **Holdings**: Fetch user holdings.
 - **Margins**: Retrieve margin details and calculate margins required for orders.
 - **Orders**: Create, modify, cancel, and fetch order details.
@@ -25,6 +26,28 @@ npm install growwapi
 ```
 
 ## Usage
+
+### Live Feed
+
+```typescript
+import { GrowwAPI } from 'growwapi';
+
+const client = new GrowwAPI();
+const liveFeed = client.liveFeed;
+
+await liveFeed.connect(handleData);
+
+// Subscribe to live feed for specific instruments
+const subscription1 = liveFeed.subscribe(11195);
+const subscription2 = liveFeed.subscribe(10999);
+
+await liveFeed.consume(subscription1);
+await liveFeed.consume(subscription2);
+
+function handleData(data: LiveFeedPrice) {
+  console.log(data);
+}
+```
 
 ### Setup
 
