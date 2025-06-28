@@ -9,9 +9,9 @@ import { InstructionsTypeParams } from '../types/InstructionsTypeParams';
 const keyPair = createUser();
 const publicKey = keyPair.getPublicKey();
 
-const jwt = await Auth.socketAccessToken(publicKey.toString('utf-8'));
+export async function connectToLiveFeed(): Promise<NatsConnection> {
+  const jwt = await Auth.socketAccessToken(publicKey.toString('utf-8'));
 
-export function connectToLiveFeed(): Promise<NatsConnection> {
   return connect({
     servers: SOCKET_URL,
     authenticator: jwtAuthenticator(jwt, keyPair.getSeed()),

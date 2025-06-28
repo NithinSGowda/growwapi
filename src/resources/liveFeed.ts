@@ -42,14 +42,14 @@ export class LiveFeed {
     });
   }
 
-  private executeWithReconnectionStrategy(action: () => void) {
+  private async executeWithReconnectionStrategy(action: () => Promise<void>) {
     if (!this.connection) {
       console.error('Connection is not established. Please connect first.');
       return;
     }
 
     try {
-      action();
+      await action();
     } catch (error) {
       console.log(error);
       // TODO - Handle specific error cases like disconnection

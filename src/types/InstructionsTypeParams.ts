@@ -4,7 +4,7 @@ import { Segment } from './Segment';
 
 export interface InstructionsTypeParams extends BaseParams {
     exchange?: Exchange;
-    exhangeToken?: number;
+    exchangeToken?: number;
     tradingSymbol?: string;
     segment?: Segment;
     growwSymbol?: string;
