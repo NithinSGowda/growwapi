@@ -3,5 +3,4 @@ export interface DetailOrderResponse {
     page: number;
     pageSize: number;
     total: number;
-    [key: string]: unknown;
 }

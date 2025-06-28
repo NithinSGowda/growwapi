@@ -1,7 +1,7 @@
 import { BaseParams } from './BaseParams';
 import { Segment } from './Segment';
 
-export interface DetailsOrderParams extends BaseParams {
+export interface OrderDetailsParams extends BaseParams {
     segment: Segment;
     growwOrderId: string;
 }

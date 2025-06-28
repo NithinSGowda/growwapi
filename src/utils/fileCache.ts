@@ -4,6 +4,7 @@ import path from 'path';
 import os from 'os';
 import crypto from 'crypto';
 import { CachedCSVResult } from '../types/CachedCSVResult';
+import { FILECACHE_TTL } from '../config';
 
 const CACHE_FOLDER = 'csv-cache';
 const memoryCache: Record<string, string> = {};
@@ -55,7 +56,7 @@ async function downloadCSVToFile(url: string, filePath: string): Promise<void> {
   writer.end();
 }
 
-export async function fetchCSV(url: string, ttl: number = 86400000): Promise<CachedCSVResult> {
+export async function fetchCSV(url: string, ttl: number = FILECACHE_TTL): Promise<CachedCSVResult> {
   const cacheFile = getCacheFilePath(url);
   await ensureCacheDir(cacheFile);
 

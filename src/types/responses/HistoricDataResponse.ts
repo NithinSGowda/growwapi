@@ -1,7 +1,7 @@
-import { CandelResponse } from './CandelResponse';
+import { CandleResponse } from './CandleResponse';
 
 export interface HistoricDataResponse {
-    candles: CandelResponse[];
+    candles: CandleResponse[];
     start_time: string;
     end_time: string;
     interval_in_minutes: number;

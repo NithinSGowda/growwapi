@@ -1,4 +1,4 @@
-export interface GetOrderResponse {
+export interface OrderResponse {
     groww_order_id: string;
     trading_symbol: string;
     order_status: string;
@@ -21,4 +21,4 @@ export interface GetOrderResponse {
     exchange_time: string;
     trade_date: string;
     order_reference_id: string;
-    }
+}
