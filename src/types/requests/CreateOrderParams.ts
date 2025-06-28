@@ -1,10 +1,10 @@
-import { BaseParams } from './BaseParams';
-import { Exchange } from './Exchange';
-import { OrderType } from './OrderType';
-import { Product } from './Product';
-import { Segment } from './Segment';
-import { TransactionType } from './TransactionType';
-import { Validity } from './Validity';
+import { BaseParams } from '../BaseParams';
+import { Exchange } from '../enums/Exchange';
+import { OrderType } from '../enums/OrderType';
+import { Product } from '../enums/Product';
+import { Segment } from '../enums/Segment';
+import { TransactionType } from '../enums/TransactionType';
+import { Validity } from '../enums/Validity';
 
 export interface CreateOrderParams extends BaseParams {
     exchange: Exchange;

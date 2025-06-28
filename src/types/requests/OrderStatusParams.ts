@@ -1,5 +1,5 @@
-import { BaseParams } from './BaseParams';
-import { Segment } from './Segment';
+import { BaseParams } from '../BaseParams';
+import { Segment } from '../enums/Segment';
 
 export interface OrderStatusParams extends BaseParams {
     growwOrderId: string;

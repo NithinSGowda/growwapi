@@ -1,6 +1,5 @@
 import { INSTRUCTIONS_URL } from '../config';
-import { CachedCSVResult } from '../types/CachedCSVResult';
-import { InstructionsTypeParams } from '../types/InstructionsTypeParams';
+import { CachedCSVResult, InstructionsTypeParams } from '../types';
 import { fetchCSV } from '../utils/fileCache';
 import { filterRows, parseCSV, toCamelCaseKeys } from '../utils/instructionsUtils';
 

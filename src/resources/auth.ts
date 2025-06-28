@@ -1,6 +1,6 @@
 import * as OTPAuth from 'otpauth';
-import { AccessToken } from '../types/AccessToken';
 import { AUTH_URL, SOCKET_TOKEN_URL } from '../config';
+import { AccessToken } from '../types';
 
 let accessToken: AccessToken | null = null;
 let currentTokenRequest: Promise<string> | null = null;

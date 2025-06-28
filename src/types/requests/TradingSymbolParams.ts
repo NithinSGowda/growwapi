@@ -1,6 +1,6 @@
-import { BaseParams } from './BaseParams';
-import { Exchange } from './Exchange';
-import { Segment } from './Segment';
+import { BaseParams } from '../BaseParams';
+import { Exchange } from '../enums/Exchange';
+import { Segment } from '../enums/Segment';
 
 export interface TradingSymbolParams extends BaseParams {
     segment: Segment;
