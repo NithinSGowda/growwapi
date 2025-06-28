@@ -1,6 +1,6 @@
 export interface OHLCResponse {
-    open: number;
+    close: number;
     high: number;
     low: number;
-    close: number;
+    open: number;
 }
