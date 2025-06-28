@@ -1,13 +1,19 @@
 import snakecaseKeys from 'snakecase-keys';
 import { HttpClient } from '../utils/http';
 import { CreateOrderParams } from '../types/CreateOrderParams';
-import { GetTradesParams } from '../types';
+import { GetTradesParams, ListOrderParams } from '../types';
 import { CancelOrderParams } from '../types/CancelOrderParams';
-import { GetOrderParams } from '../types/GetOrderParams';
-import { ListOrderParams } from '../types/ListOrderParams';
+import { OrderDetailsParams } from '../types/OrderDetailsParams';
 import { ModifyOrderParams } from '../types/ModifyOrderParams';
 import { OrderStatusParams } from '../types/OrderStatusParams';
 import { OrderStatusByReferenceParams } from '../types/OrderStatusByReferenceParams';
+import { buildUrlWithParams } from '../utils/url';
+import { CreateOrderResponse } from '../types/responses/CreateOrderResponse';
+import { ModifyOrderResponse } from '../types/responses/ModifyOrderResponse';
+import { CancelOrderResponse } from '../types/responses/CancelOrderResponse';
+import { GetTradesResponse } from '../types/responses/GetTradesResponse';
+import { OrderStatusResponse } from '../types/responses/OrderStatusResponse';
+import { OrderResponse } from '../types/responses/OrderResponse';
 
 export class Orders {
   private http: HttpClient;
@@ -16,44 +22,43 @@ export class Orders {
     this.http = new HttpClient(baseUrl, '/order');
   }
 
-  async create(params: CreateOrderParams) {
-    return this.http.post('/create',
-      snakecaseKeys(params)
-    );
+  async create(params: CreateOrderParams): Promise<CreateOrderResponse> {
+    return await this.http.post('/create',
+      snakecaseKeys(params)) as CreateOrderResponse;
   }
 
-  async modify(params: ModifyOrderParams){
-    return this.http.post('/modify',
-      snakecaseKeys(params));
+  async modify(params: ModifyOrderParams): Promise<ModifyOrderResponse> {
+    return await this.http.post('/modify',
+      snakecaseKeys(params)) as ModifyOrderResponse;
   }
 
-  async cancel(params: CancelOrderParams) {
-    return this.http.post('/cancel',
-      snakecaseKeys(params));
+  async cancel(params: CancelOrderParams): Promise<CancelOrderResponse> {
+    return await this.http.post('/cancel',
+      snakecaseKeys(params)) as CancelOrderResponse;
   }
 
-  async getTrades(params: GetTradesParams) {
-    const query = params ? '?' + new URLSearchParams(params as any).toString() : '';
-    return this.http.get(`/trades/${params.growwOrderId}${query}`);
+  async getTrades(params: GetTradesParams): Promise<GetTradesResponse[]> {
+    const url = buildUrlWithParams(`/trades/${params.growwOrderId}`, params);
+    return (await this.http.get(url)).trade_list as GetTradesResponse[];
   }
 
-  async status(params: OrderStatusParams) {
-    const query = params ? '?' + new URLSearchParams(params as any).toString() : '';
-    return this.http.get(`/status/${params.growwOrderId}${query}`);
+  async status(params: OrderStatusParams): Promise<OrderStatusResponse> {
+    const url = buildUrlWithParams(`/status/${params.growwOrderId}`, params);
+    return await this.http.get(url) as OrderStatusResponse;
   }
 
-  async statusByReferenceID(params: OrderStatusByReferenceParams) {
-    const query = params ? '?' + new URLSearchParams(params as any).toString() : '';
-    return this.http.get(`/status/${params.orderReferenceId}${query}`);
+  async statusByReference(params: OrderStatusByReferenceParams): Promise<OrderStatusResponse> {
+    const url = buildUrlWithParams(`/status/reference/${params.orderReferenceId}`, params);
+    return await this.http.get(url) as OrderStatusResponse;
   }
 
-  async list(params: ListOrderParams) {
-    const query = params ? '?' + new URLSearchParams(params as any).toString() : '';
-    return this.http.get(`/list${query}`);
+  async getOrders(params: ListOrderParams): Promise<OrderResponse[]> {
+    const url = buildUrlWithParams('/list', params);
+    return (await this.http.get(url)).order_list as OrderResponse[];
   }
 
-  async get(params: GetOrderParams) {
-    const query = params ? '?' + new URLSearchParams(params as any).toString() : '';
-    return this.http.get(`/detail/${params.growwOrderId}${query}`);
+  async Details(params: OrderDetailsParams): Promise<OrderResponse> {
+    const url = buildUrlWithParams(`/detail/${params.growwOrderId}`, params);
+    return await this.http.get(url) as OrderResponse;
   }
 }

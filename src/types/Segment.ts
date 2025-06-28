@@ -1,4 +1,4 @@
 export enum Segment {
-  Cash = 'CASH',
-  Fno = 'FNO',
+  CASH = 'CASH',
+  FNO = 'FNO',
 }

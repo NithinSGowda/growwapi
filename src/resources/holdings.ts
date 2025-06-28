@@ -1,4 +1,5 @@
 import { HttpClient } from '../utils/http';
+import { HoldingsResponse } from '../types/responses/HoldingsResponse';
 
 export class Holdings {
   private http: HttpClient;
@@ -7,7 +8,7 @@ export class Holdings {
     this.http = new HttpClient(baseUrl, '/holdings/user');
   }
 
-  async list() {
-    return this.http.get('');
+  async list(): Promise<HoldingsResponse[]> {
+    return (await this.http.get('')).holdings as HoldingsResponse[];
   }
 }
