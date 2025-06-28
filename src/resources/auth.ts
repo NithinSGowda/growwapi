@@ -3,6 +3,7 @@ import { AccessToken } from '../types/AccessToken';
 import { AUTH_URL, SOCKET_TOKEN_URL } from '../config';
 
 let accessToken: AccessToken | null = null;
+let currentTokenRequest: Promise<string> | null = null;
 
 export class Auth {
   public static async getAccessToken(): Promise<string> {
@@ -12,19 +13,31 @@ export class Auth {
       }
     }
 
+    if (currentTokenRequest) {
+      return currentTokenRequest;
+    }
+
     if (!process.env.GROWW_API_KEY || !process.env.GROWW_API_SECRET) {
       throw new Error('GROWW_API_KEY and GROWW_API_SECRET must be set in environment variables');
     }
 
-    const response = await Auth.createAccessToken();
-    if (!response.ok) {
-      throw new Error(`Failed to create access token: ${response.statusText}, Status Code: ${response.status}, Response: ${await response.text()}`);
+    currentTokenRequest = (async () => {
+      const response = await Auth.createAccessToken();
+      if (!response.ok) {
+        throw new Error(`Failed to create access token: ${response.statusText}, Status Code: ${response.status}, Response: ${await response.text()}`);
+      }
+
+      const data = await response.json();
+
+      accessToken = data as AccessToken;
+      return accessToken?.token;
+    })();
+
+    try {
+      return await currentTokenRequest;
+    } finally {
+      currentTokenRequest = null;
     }
-
-    const data = await response.json();
-
-    accessToken = data as AccessToken;
-    return accessToken?.token;
   }
 
   public static async socketAccessToken(publicKey: string): Promise<string> {

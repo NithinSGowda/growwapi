@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+message LiveFeedPrice {
+  string symbol = 1;
+  bool isActive = 3;
+  PriceData priceData = 4;
+
+  message PriceData {
+    double timestamp = 1;
+    double price = 13;
+  }
+}

@@ -58,6 +58,7 @@
     "nats.ws": "^1.30.3",
     "otpauth": "^9.4.0",
     "papaparse": "^5.5.3",
+    "protobufjs": "^7.5.3",
     "snakecase-keys": "^8.0.1",
     "ts-nkeys": "^1.0.16"
   }
