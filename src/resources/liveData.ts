@@ -1,9 +1,5 @@
-import { GetLTPParams } from '../types/GetLTPParams';
-import { GetOHLCParams } from '../types/GetOHLCParams';
-import { GetQuoteParams } from '../types/GetQuoteParams';
-import { GetLTPResponse } from '../types/responses/GetLTPResponse';
-import { GetOHLCResponse } from '../types/responses/GetOHLCResponse';
-import { GetQuoteResponse } from '../types/responses/GetQuoteResponse';
+import { GetQuoteParams, GetQuoteResponse, GetLTPResponse, GetOHLCParams, GetOHLCResponse } from '../types';
+import { GetLTPParams } from '../types/requests/GetLTPParams';
 import { HttpClient } from '../utils/http';
 import { buildUrlWithParams } from '../utils/url';
 

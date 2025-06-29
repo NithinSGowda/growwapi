@@ -8,6 +8,7 @@ import { LiveFeed } from './resources/liveFeed';
 import { Margins } from './resources/margins';
 import { Orders } from './resources/order';
 import { Positions } from './resources/positions';
+import { validateEnvVariables } from './utils/envValidator';
 
 export * from './types';
 
@@ -23,6 +24,7 @@ export class GrowwAPI {
   public position: Positions;
 
   constructor(baseUrl = API_URL) {
+    validateEnvVariables();
     this.auth = new Auth();
     this.liveFeed = new LiveFeed();
     this.historicData = new HistoricData(baseUrl);

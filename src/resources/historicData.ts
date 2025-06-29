@@ -1,7 +1,5 @@
-import { HistoricDataParams } from '../types/HistoricDataParams';
-import { HistoricDataResponse } from '../types/responses/HistoricDataResponse';
+import { HistoricDataParams, HistoricDataResponse } from '../types';
 import { isEpochISO8601 } from '../utils/date';
-
 import { HttpClient } from '../utils/http';
 import { buildUrlWithParams } from '../utils/url';
 

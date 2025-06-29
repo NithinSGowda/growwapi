@@ -1,19 +1,19 @@
 export interface UserPositionsResponse {
-    trading_symbol: string;
-    segment: string;
-    credit_quantity: number;
-    credit_price: number;
-    debit_quantity: number;
-    debit_price: number;
-    carry_forward_credit_quantity: number;
-    carry_forward_credit_price: number;
-    carry_forward_debit_quantity: number;
-    carry_forward_debit_price: number;
+    carryForwardCreditPrice: number;
+    carryForwardCreditQuantity: number;
+    carryForwardDebitPrice: number;
+    carryForwardDebitQuantity: number;
+    creditPrice: number;
+    creditQuantity: number;
+    debitPrice: number;
+    debitQuantity: number;
     exchange: string;
-    symbol_isin: string;
-    quantity: number;
+    netCarryForwardPrice: number;
+    netCarryForwardQuantity: number;
+    netPrice: number;
     product: string;
-    net_carry_forward_quantity: number;
-    net_price: number;
-    net_carry_forward_price: number;
+    quantity: number;
+    segment: string;
+    symbolIsin: string;
+    tradingSymbol: string;
 }

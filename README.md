@@ -95,11 +95,11 @@ Fetches user holdings.
 #### `Margins.details()`
 Fetches margin details for the user.
 
-#### `Margins.requiredForOrder(params: RequiredForOrderParams)`
+#### `Margins.requiredForOrder(params: MarginRequiredForOrderParams)`
 Calculates margins required for an order.
 
 **Parameters:**
-- `params: RequiredForOrderParams` - The parameters for margin calculation.
+- `params: MarginRequiredForOrderParams` - The parameters for margin calculation.
 
 ### Orders
 

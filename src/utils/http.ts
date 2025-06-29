@@ -1,5 +1,6 @@
 import { Auth } from '../resources/auth';
 import { BaseResponse } from '../types/responses/BaseResponse';
+import camelcaseKeys from 'camelcase-keys';
 
 export class HttpClient {
   constructor(
@@ -39,6 +40,8 @@ export class HttpClient {
 
   private async handleResponse(res: Response) {
     if (!res.ok) throw new Error(await res.text());
-    return res.json();
+
+    const jsonResponse = await res.json();
+    return camelcaseKeys(jsonResponse, { deep: true });
   }
 }

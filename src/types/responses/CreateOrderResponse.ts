@@ -1,6 +1,6 @@
 export interface CreateOrderResponse {
-    groww_order_id: string;
-    order_status: string;
-    order_reference_id: string;
+    growwOrderId: string;
+    orderReferenceId: string;
+    orderStatus: string;
     remark: string;
 }
