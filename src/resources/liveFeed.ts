@@ -1,12 +1,12 @@
 import { NatsConnection, Subscription } from 'nats';
 import { connectToLiveFeed, generateSubscriptionTopic } from '../utils/liveFeed';
 import { LiveFeedPriceDecoder } from '../utils/Protobuffer/protobuffer';
-import { LiveFeedPrice } from '../types/LiveFeed/liveFeedPrice';
+import { LiveFeedPrice } from '../types';
 
 // TODO - Add more types for callback response
 export class LiveFeed {
   private connection: NatsConnection | null = null;
-  private callback: (data: LiveFeedPrice) => void = () => {};
+  private callback: (data: LiveFeedPrice) => void = () => null;
 
   async connect(callback: (data: any) => void) {
     this.callback = callback;

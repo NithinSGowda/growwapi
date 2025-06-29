@@ -1,9 +1,6 @@
-import { TradingSymbolParams } from '../types/TradingSymbolParams';
-import { UserParams } from '../types/UserParams';
+import { UserParams, UserPositionsResponse, TradingSymbolParams, TradingSymbolResponse } from '../types';
 import { HttpClient } from '../utils/http';
 import { buildUrlWithParams } from '../utils/url';
-import { UserPositionsResponse } from '../types/responses/UserPositionsResponse';
-import { TradingSymbolResponse } from '../types/responses/TradingSymbolResponse';
 
 export class Positions {
   private http: HttpClient;

@@ -73,6 +73,9 @@ growwapi is a NodeJS SDK for Groww trading APIs. The library provides functional
 - Well-defined TypeScript interfaces for all API parameters and responses
 - Organized in dedicated `types` directory
 - Consistent naming with clear suffixes (e.g., `Params`, `Response`)
+- All types should be alphabetically sorted
+- Mandatory properties should be clearly defined, with optional properties marked as such
+- Optional properties should be sorted after mandatory properties
 
 ## Environment Configuration
 

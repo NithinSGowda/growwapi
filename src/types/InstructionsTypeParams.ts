@@ -1,6 +1,6 @@
 import { BaseParams } from './BaseParams';
-import { Exchange } from './Exchange';
-import { Segment } from './Segment';
+import { Exchange } from './enums/Exchange';
+import { Segment } from './enums/Segment';
 
 export interface InstructionsTypeParams extends BaseParams {
     exchange?: Exchange;

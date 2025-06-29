@@ -1,5 +1,5 @@
+import { HoldingsResponse } from '../types';
 import { HttpClient } from '../utils/http';
-import { HoldingsResponse } from '../types/responses/HoldingsResponse';
 
 export class Holdings {
   private http: HttpClient;

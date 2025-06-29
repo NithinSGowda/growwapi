@@ -1,19 +1,7 @@
 import snakecaseKeys from 'snakecase-keys';
 import { HttpClient } from '../utils/http';
-import { CreateOrderParams } from '../types/CreateOrderParams';
-import { GetTradesParams, ListOrderParams } from '../types';
-import { CancelOrderParams } from '../types/CancelOrderParams';
-import { OrderDetailsParams } from '../types/OrderDetailsParams';
-import { ModifyOrderParams } from '../types/ModifyOrderParams';
-import { OrderStatusParams } from '../types/OrderStatusParams';
-import { OrderStatusByReferenceParams } from '../types/OrderStatusByReferenceParams';
+import { CreateOrderParams, CreateOrderResponse, ModifyOrderParams, ModifyOrderResponse, CancelOrderParams, CancelOrderResponse, GetTradesParams, GetTradesResponse, OrderStatusParams, OrderStatusResponse, OrderStatusByReferenceParams, ListOrderParams, OrderResponse, OrderDetailsParams } from '../types';
 import { buildUrlWithParams } from '../utils/url';
-import { CreateOrderResponse } from '../types/responses/CreateOrderResponse';
-import { ModifyOrderResponse } from '../types/responses/ModifyOrderResponse';
-import { CancelOrderResponse } from '../types/responses/CancelOrderResponse';
-import { GetTradesResponse } from '../types/responses/GetTradesResponse';
-import { OrderStatusResponse } from '../types/responses/OrderStatusResponse';
-import { OrderResponse } from '../types/responses/OrderResponse';
 
 export class Orders {
   private http: HttpClient;
@@ -57,7 +45,7 @@ export class Orders {
     return (await this.http.get(url)).order_list as OrderResponse[];
   }
 
-  async Details(params: OrderDetailsParams): Promise<OrderResponse> {
+  async details(params: OrderDetailsParams): Promise<OrderResponse> {
     const url = buildUrlWithParams(`/detail/${params.growwOrderId}`, params);
     return await this.http.get(url) as OrderResponse;
   }
