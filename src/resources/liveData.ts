@@ -1,4 +1,5 @@
-import { GetQuoteParams, GetQuoteResponse, GetLTParams, GetLTPResponse, GetOHLCParams, GetOHLCResponse } from '../types';
+import { GetQuoteParams, GetQuoteResponse, GetLTPResponse, GetOHLCParams, GetOHLCResponse } from '../types';
+import { GetLTPParams } from '../types/requests/GetLTPParams';
 import { HttpClient } from '../utils/http';
 import { buildUrlWithParams } from '../utils/url';
 
@@ -14,7 +15,7 @@ export class LiveData {
     return (await this.http.get(url)) as GetQuoteResponse;
   }
 
-  async getLTP(params: GetLTParams): Promise<GetLTPResponse> {
+  async getLTP(params: GetLTPParams): Promise<GetLTPResponse> {
     const url = buildUrlWithParams('/ltp', params);
     return (await this.http.get(url)) as GetLTPResponse;
   }

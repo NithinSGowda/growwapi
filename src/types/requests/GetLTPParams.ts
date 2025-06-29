@@ -1,7 +1,7 @@
 import { BaseParams } from '../BaseParams';
 import { Segment } from '../enums/Segment';
 
-export interface GetLTParams extends BaseParams {
+export interface GetLTPParams extends BaseParams {
     exchangeSymbols: string[];
     segment: Segment;
 }

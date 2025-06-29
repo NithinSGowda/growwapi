@@ -14,7 +14,7 @@ export * from './enums/Validity';
 export * from './liveFeed/liveFeedPrice';
 export * from './requests/CancelOrderParams';
 export * from './requests/CreateOrderParams';
-export * from './requests/GetLTParams';
+export * from './requests/GetLTPParams';
 export * from './requests/GetOHLCParams';
 export * from './requests/GetParams';
 export * from './requests/GetQuoteParams';
