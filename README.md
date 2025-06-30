@@ -9,25 +9,61 @@ NodeJS SDK for Groww trading APIs
 ![GitHub issues](https://img.shields.io/github/issues/nithinsgowda/growwapi?style=for-the-badge&label=Issues)
 ![license](https://img.shields.io/npm/l/growwapi?style=for-the-badge&label=License)
 
-## Features
+## 📝 Overview
 
-- **Live Feed**: Real-time data streaming for market prices.
-- **Holdings**: Fetch user holdings.
-- **Margins**: Retrieve margin details and calculate margins required for orders.
-- **Orders**: Create, modify, cancel, and fetch order details.
-- **Positions**: Fetch user positions and trading symbol details.
+growwapi is a NodeJS SDK for Groww trading APIs. The library provides functionality for trading on Groww including holdings management, margin calculations, order management, and position tracking.
 
-## Installation
+---
 
-Install the package using npm:
+## 🚀 Features
+
+- **Authentication**: Secure API access with API key and TOTP
+- **Live Feed**: Real-time data streaming for market prices
+- **Historic Data**: Access to historical market data
+- **Holdings**: Fetch user portfolio holdings
+- **Instructions**: CSV-based instrument details
+- **Live Data**: Current market data access
+- **Margins**: Retrieve margin details and calculate margins required for orders
+- **Orders**: Create, modify, cancel, and fetch order details
+- **Positions**: Fetch user positions and trading symbol details
+
+---
+
+## ⚙️ Installation
 
 ```bash
 npm install growwapi
 ```
 
-## Usage
+---
 
-### Live Feed
+## ⚡ Quick Start
+
+### 1. Environment Setup
+
+Create a `.env` file in your project root:
+
+```env
+GROWW_API_KEY=your_api_key
+GROWW_API_SECRET=your_api_secret
+```
+
+Optional:
+```env
+GROWW_API_BASE_URL=
+GROWW_API_VERSION=
+GROWW_FILECACHE_TTL=
+```
+
+### 2. Basic Usage
+
+```typescript
+import { GrowwAPI } from 'growwapi';
+
+const client = new GrowwAPI();
+```
+
+### 3. Live Feed Example
 
 ```typescript
 import { GrowwAPI } from 'growwapi';
@@ -37,7 +73,6 @@ const liveFeed = client.liveFeed;
 
 await liveFeed.connect(handleData);
 
-// Subscribe to live feed for specific instruments
 const subscription1 = liveFeed.subscribe(11195);
 const subscription2 = liveFeed.subscribe(10999);
 
@@ -49,19 +84,11 @@ function handleData(data: LiveFeedPrice) {
 }
 ```
 
-### Setup
-
-Create a `.env` file in your project root and add the following environment variables:
-
-```env
-GROWW_API_KEY=your_api_key
-GROWW_API_SECRET=your_api_secret
-```
-
-### Example
+### 4. Trading Example
 
 ```typescript
 import { GrowwAPI } from 'growwapi';
+import { Exchange, OrderType, Product, Segment, TransactionType, Validity } from 'growwapi';
 
 const client = new GrowwAPI();
 
@@ -83,113 +110,91 @@ client.orders.create({
 }).then(console.log).catch(console.error);
 ```
 
-## API Reference
+---
 
-### Holdings
+## 📚 API Reference
 
-#### `Holdings.list()`
-Fetches user holdings.
+### Authentication
+- `Auth.generateToken()` – Generates a new authentication token.
+- `Auth.refreshToken()` – Refreshes the current authentication token.
 
-### Margins
+### Live Feed & Data
+- `LiveFeed.connect(callback)` – Establishes a WebSocket connection for real-time data.
+- `LiveFeed.subscribe(instrumentId)` – Subscribes to real-time data for a specific instrument.
+- `LiveFeed.consume(subscription)` – Starts consuming data from a subscription.
+- `LiveFeed.disconnect()` – Disconnects from the WebSocket.
+- `HistoricData.get(params)` – Fetches historical market data.
+- `LiveData.get(params)` – Fetches current market data for specified instruments.
 
-#### `Margins.details()`
-Fetches margin details for the user.
+### Instruments & Instructions
+- `Instructions.getInstructions()` – Fetches the full instructions CSV file.
+- `Instructions.getFilteredInstructions(params)` – Fetches filtered instructions based on provided parameters.
 
-#### `Margins.requiredForOrder(params: MarginRequiredForOrderParams)`
-Calculates margins required for an order.
+### Portfolio & Trading
+#### Holdings
+- `Holdings.list()` – Fetches user holdings.
 
-**Parameters:**
-- `params: MarginRequiredForOrderParams` - The parameters for margin calculation.
+#### Margins
+- `Margins.details()` – Fetches margin details for the user.
+- `Margins.requiredForOrder(params)` – Calculates margins required for an order.
 
-### Orders
+#### Orders
+- `Orders.create(params)` – Creates a new order.
+- `Orders.modify(params)` – Modifies an existing order.
+- `Orders.cancel(params)` – Cancels an order.
+- `Orders.getTrades(params)` – Fetches trade details for an order.
+- `Orders.status(params)` – Fetches the status of an order.
+- `Orders.statusByReference(params)` – Fetches the status of an order by reference ID.
+- `Orders.getOrders(params)` – Lists all orders.
+- `Orders.details(params)` – Fetches details of an order.
 
-#### `Orders.create(params: CreateOrderParams)`
-Creates a new order.
+#### Positions
+- `Positions.user(params)` – Fetches user positions.
+- `Positions.tradingSymbol(params)` – Fetches details of a trading symbol.
 
-**Parameters:**
-- `params: CreateOrderParams` - The parameters for creating an order.
+---
 
-#### `Orders.modify(params: ModifyOrderParams)`
-Modifies an existing order.
-
-**Parameters:**
-- `params: ModifyOrderParams` - The parameters for modifying an order.
-
-#### `Orders.cancel(params: CancelOrderParams)`
-Cancels an order.
-
-**Parameters:**
-- `params: CancelOrderParams` - The parameters for canceling an order.
-
-#### `Orders.getTrades(params: GetTradesParams)`
-Fetches trade details for an order.
-
-**Parameters:**
-- `params: GetTradesParams` - The parameters for fetching trade details.
-
-#### `Orders.status(params: OrderStatusParams)`
-Fetches the status of an order.
-
-**Parameters:**
-- `params: OrderStatusParams` - The parameters for fetching order status.
-
-#### `Orders.statusByReferenceID(params: OrderStatusByReferenceParams)`
-Fetches the status of an order by reference ID.
-
-**Parameters:**
-- `params: OrderStatusByReferenceParams` - The parameters for fetching order status by reference ID.
-
-#### `Orders.list(params: ListOrderParams)`
-Lists all orders.
-
-**Parameters:**
-- `params: ListOrderParams` - The parameters for listing orders.
-
-#### `Orders.get(params: GetOrderParams)`
-Fetches details of an order.
-
-**Parameters:**
-- `params: GetOrderParams` - The parameters for fetching order details.
-
-### Positions
-
-#### `Positions.user(params: UserParams)`
-Fetches user positions.
-
-**Parameters:**
-- `params: UserParams` - The parameters for fetching user positions.
-
-#### `Positions.tradingSymbol(params: TradingSymbolParams)`
-Fetches details of a trading symbol.
-
-**Parameters:**
-- `params: TradingSymbolParams` - The parameters for fetching trading symbol details.
-
-## Development
+## 🛠️ Development
 
 ### Scripts
-
 - `npm run build`: Builds the project.
 - `npm run dev`: Runs the project in development mode.
 - `npm run test`: Runs tests.
 - `npm run lint`: Lints the code.
+- `npm generate-exports`: Generates exports for all types.
 
 ### Testing
-
-Run tests using:
-
 ```bash
 npm run test
 ```
 
 ### Linting
-
-Lint the code using:
-
 ```bash
 npm run lint
 ```
 
-## License
+---
 
-This project is licensed under the Apache License 2.0. See the [LICENSE](LICENSE) file for details.
+## 🏗️ Architecture
+
+- **GrowwAPI**: Main class that initializes and provides access to all service modules
+- **Resources**: Independent modules for different API functionalities:
+  - Auth, LiveFeed, HistoricData, Holdings, Instructions, LiveData, Margins, Orders, Positions
+
+---
+
+## 🤝 Contributing
+
+- Maintain strong typing for all methods and parameters
+- Follow resource-based module organization
+- Use camelCase for variables and methods
+- Document all public methods and parameters
+- Handle API errors consistently with descriptive messages
+- Validate environmental dependencies before API calls
+- Follow the established pattern for new resource modules
+
+---
+
+## 📄 License
+
+This project is licensed under the Apache License 2.0. See the [`LICENSE`](LICENSE) file for details.
