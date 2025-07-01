@@ -1,6 +1,6 @@
 import * as OTPAuth from 'otpauth';
 import { AUTH_URL, SOCKET_TOKEN_URL } from '../config';
-import { AccessToken } from '../types';
+import { AccessToken, SocketCredentials } from '../types';
 
 let accessToken: AccessToken | null = null;
 let currentTokenRequest: Promise<string> | null = null;
@@ -36,9 +36,9 @@ export class Auth {
     }
   }
 
-  public static async socketAccessToken(publicKey: string): Promise<string> {
+  public static async socketAccessToken(publicKey: string): Promise<SocketCredentials> {
     const token = await Auth.getAccessToken();
-    const result = await fetch(SOCKET_TOKEN_URL, {
+    const response = await fetch(SOCKET_TOKEN_URL, {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -49,7 +49,9 @@ export class Auth {
       }),
     });
 
-    return result.ok ? result.json().then(data => data.token) : Promise.reject(new Error(`Failed to create socket access token: ${result.statusText}, Status Code: ${result.status}, Response: ${await result.text()}`));
+    const result: SocketCredentials = await response.json() as SocketCredentials;
+
+    return response.ok ? result : Promise.reject(new Error(`Failed to create socket access token: ${response.statusText}, Status Code: ${response.status}, Response: ${await response.text()}`));
   }
 
   private static async createAccessToken() {

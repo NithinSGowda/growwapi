@@ -1,7 +1,4 @@
-interface LiveFeedData {
-  symbol: string;
-  isActive?: boolean;
-}
+import { LiveFeedData } from '..';
 
 export interface LiveFeedPrice extends LiveFeedData {
   priceData: {

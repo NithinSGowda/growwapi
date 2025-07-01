@@ -1,28 +1,32 @@
-import { NatsConnection, Subscription } from 'nats';
-import { connectToLiveFeed, generateSubscriptionTopic } from '../utils/liveFeed';
-import { LiveFeedPriceDecoder } from '../utils/Protobuffer/protobuffer';
-import { LiveFeedPrice } from '../types';
+import { Subscription } from 'nats';
+import { connectToLiveFeed, generateSubscriptionTopic, liveFeedDecoder } from '../utils/LiveFeed';
+import { LiveFeedCallback, LiveFeedConnection, LiveFeedSubscriptionType } from '../types';
 
-// TODO - Add more types for callback response
 export class LiveFeed {
-  private connection: NatsConnection | null = null;
-  private callback: (data: LiveFeedPrice) => void = () => null;
+  private connection: LiveFeedConnection | null = null;
+  private subscriptions: Map<string, LiveFeedSubscriptionType> = new Map();
 
-  async connect(callback: (data: any) => void) {
-    this.callback = callback;
+  async connect() {
     this.connection = await connectToLiveFeed();
   }
 
   async disconnect() {
     if (this.connection) {
-      await this.connection.close();
+      await this.connection.stream?.close();
       this.connection = null;
     }
   }
 
-  async subscribe(exchangeToken: number): Promise<Subscription | undefined> {
-    const topic = await generateSubscriptionTopic(exchangeToken);
-    return this.connection?.subscribe(topic);
+  async subscribe(type: LiveFeedSubscriptionType, exchangeToken?: number): Promise<Subscription | undefined> {
+    const subscriptionId = this.connection?.credentials.subscriptionId;
+    if (!subscriptionId) {
+      console.error('Subscription ID is not available. Please connect first.');
+      return undefined;
+    }
+
+    const topic = await generateSubscriptionTopic(type, subscriptionId, exchangeToken);
+    this.subscriptions.set(topic, type);
+    return this.connection?.stream?.subscribe(topic);
   }
 
   unsubscribe(subscription: Subscription) {
@@ -31,13 +35,14 @@ export class LiveFeed {
     }
   }
 
-  async consume(subscription: Subscription) {
+  async consume(subscription: Subscription, callback: (data: LiveFeedCallback) => void) {
     this.executeWithReconnectionStrategy(async () => {
       for await (const m of subscription) {
-        const decoded = LiveFeedPriceDecoder.decode(m.data);
-        const liveFeedData = JSON.parse(JSON.stringify(decoded, null, 2)) as LiveFeedPrice;
+        console.log(m.data, Buffer.from(m.data).toString('hex'));
+        const feedType = this.subscriptions.get(m.subject) as LiveFeedSubscriptionType;
+        const liveFeedData = liveFeedDecoder(feedType, m.data);
 
-        this.callback(liveFeedData);
+        callback(liveFeedData);
       }
     });
   }

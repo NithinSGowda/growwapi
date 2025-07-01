@@ -10,3 +10,25 @@ message LiveFeedPrice {
     double price = 13;
   }
 }
+
+message LiveFeedMarketDepth {
+  string symbol = 1;
+  sint32 status = 3;
+  PriceData price_data = 5;
+
+  message PriceData {
+    double timestamp = 1;
+    repeated book buyBook = 2;
+    repeated book sellBook = 3;
+  }
+}
+
+message book {
+  uint32 offset = 1;
+  CandleValues values = 2;
+}
+
+message CandleValues {
+  double price = 1;
+  double volume = 2;
+}
