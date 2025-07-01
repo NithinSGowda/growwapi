@@ -11,7 +11,7 @@ export * from './enums/Product';
 export * from './enums/Segment';
 export * from './enums/TransactionType';
 export * from './enums/Validity';
-export * from './liveFeed/liveFeedPrice';
+export * from './liveFeed/LiveFeedPrice';
 export * from './requests/CancelOrderParams';
 export * from './requests/CreateOrderParams';
 export * from './requests/GetLTPParams';

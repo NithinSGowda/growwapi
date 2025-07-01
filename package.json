@@ -15,7 +15,8 @@
     "test": "jest",
     "lint": "eslint src --ext .ts",
     "prepare": "npm run build",
-    "generate-exports": "node scripts/generate-exports.mjs"
+    "generate-exports": "node scripts/generate-exports.mjs",
+    "prebuild": "rm -f tsconfig.tsbuildinfo"
   },
   "repository": {
     "type": "git",
