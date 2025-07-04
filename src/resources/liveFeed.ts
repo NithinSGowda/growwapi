@@ -1,6 +1,6 @@
 import { Subscription } from 'nats';
 import { connectToLiveFeed, generateSubscriptionTopic, liveFeedDecoder } from '../utils/LiveFeed';
-import { LiveFeedCallback, LiveFeedConnection, LiveFeedSubscriptionType } from '../types';
+import { LiveFeedCallbackData, LiveFeedConnection, LiveFeedSubscriptionType } from '../types';
 
 export class LiveFeed {
   private connection: LiveFeedConnection | null = null;
@@ -35,7 +35,7 @@ export class LiveFeed {
     }
   }
 
-  async consume(subscription: Subscription, callback: (data: LiveFeedCallback) => void) {
+  async consume(subscription: Subscription, callback: (data: LiveFeedCallbackData) => void) {
     this.executeWithReconnectionStrategy(async () => {
       for await (const m of subscription) {
         console.log(m.data, Buffer.from(m.data).toString('hex'));

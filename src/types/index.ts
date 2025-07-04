@@ -12,7 +12,7 @@ export * from './enums/Product';
 export * from './enums/Segment';
 export * from './enums/TransactionType';
 export * from './enums/Validity';
-export * from './liveFeed/LiveFeedCallback';
+export * from './liveFeed/LiveFeedCallbackData';
 export * from './liveFeed/LiveFeedConnection';
 export * from './liveFeed/LiveFeedData';
 export * from './liveFeed/LiveFeedMarketDepth';
