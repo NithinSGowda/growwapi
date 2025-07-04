@@ -39,7 +39,7 @@ export class HttpClient {
   }
 
   private async handleResponse(res: Response) {
-    if (!res.ok) throw new Error(await res.text());
+    if (!res.ok) throw new Error(await res?.text());
 
     const jsonResponse = await res.json();
     return camelcaseKeys(jsonResponse, { deep: true });

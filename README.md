@@ -71,15 +71,18 @@ import { GrowwAPI } from 'growwapi';
 const client = new GrowwAPI();
 const liveFeed = client.liveFeed;
 
-await liveFeed.connect(handleData);
+await liveFeed.connect();
 
-const subscription1 = liveFeed.subscribe(11195);
-const subscription2 = liveFeed.subscribe(10999);
+const livePriceFeed = liveFeed.subscribe(LiveFeedSubscriptionType.Price, 11195);
+const marketDepthFeed = liveFeed.subscribe(LiveFeedSubscriptionType.MarketDepth, 11195);
 
-await liveFeed.consume(subscription1);
-await liveFeed.consume(subscription2);
+const fnoOrderUpdates = liveFeed.subscribe(LiveFeedSubscriptionType.FnoOrderUpdates);
 
-function handleData(data: LiveFeedPrice) {
+await liveFeed.consume(livePriceFeed, handleData);
+await liveFeed.consume(marketDepthFeed, handleData);
+await liveFeed.consume(fnoOrderUpdates, handleData);
+
+function handleLiveFeed(data: LiveFeedCallbackData) {
   console.log(data);
 }
 ```
