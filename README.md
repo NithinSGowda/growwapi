@@ -7,6 +7,8 @@ NodeJS SDK for Groww trading APIs
 
 ![downloads](https://img.shields.io/npm/dy/growwapi?style=for-the-badge&label=Downloads)
 ![GitHub issues](https://img.shields.io/github/issues/nithinsgowda/growwapi?style=for-the-badge&label=Issues)
+
+![CI Status](https://img.shields.io/github/actions/workflow/status/NithinSGowda/growwapi/npm-publish.yml?style=for-the-badge&label=CI%20Status) 
 ![license](https://img.shields.io/npm/l/growwapi?style=for-the-badge&label=License)
 
 ## 📝 Overview
