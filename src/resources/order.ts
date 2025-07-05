@@ -27,7 +27,7 @@ export class Orders {
 
   async getTrades(params: GetTradesParams): Promise<GetTradesResponse[]> {
     const url = buildUrlWithParams(`/trades/${params.growwOrderId}`, params);
-    return (await this.http.get(url)).trade_list as GetTradesResponse[];
+    return (await this.http.get(url)).tradeList as GetTradesResponse[];
   }
 
   async status(params: OrderStatusParams): Promise<OrderStatusResponse> {
@@ -42,7 +42,7 @@ export class Orders {
 
   async getOrders(params: ListOrderParams): Promise<OrderResponse[]> {
     const url = buildUrlWithParams('/list', params);
-    return (await this.http.get(url)).order_list as OrderResponse[];
+    return (await this.http.get(url)).orderList as OrderResponse[];
   }
 
   async details(params: OrderDetailsParams): Promise<OrderResponse> {
