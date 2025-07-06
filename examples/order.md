@@ -131,4 +131,4 @@ console.log('Recent Orders:', ordersList);
 - All methods are asynchronous and return strongly typed responses.
 - API errors include status code, response text, and descriptive messages.
 - Ensure required environment variables are set before running these examples.
-- For more details, refer to the
+- For more details, refer to the [API documentation](../README.md).
