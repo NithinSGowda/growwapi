@@ -1,28 +1,37 @@
 import { LiveFeedMarketDepth, LiveFeedOrderUpdate, LiveFeedPositionUpdate, LiveFeedPrice } from '../../types';
 import { LiveFeedFNOOrderUpdate } from '../../types/liveFeed/LiveFeedFNOOrderUpdate';
-import { LiveFeedMarketDepthDecoder, LiveFeedOrderUpdatesDecoder, LiveFeedPositionOrderUpdatesDecoder, LiveFeedPriceDecoder } from '../Protobuffer/protobuffer';
+import {
+  LiveFeedMarketDepthDecoder,
+  LiveFeedOrderUpdatesDecoder,
+  LiveFeedPositionOrderUpdatesDecoder,
+  LiveFeedPriceDecoder
+} from '../Protobuffer/protobuffer';
+
+const toObjectOptions = { longs: Number, enums: String, defaults: true, arrays: true, objects: true };
 
 export function PriceDecoder(data: Uint8Array): LiveFeedPrice {
   const decoded = LiveFeedPriceDecoder.decode(data);
-  return JSON.parse(JSON.stringify(decoded, null, 2)) as LiveFeedPrice;
+  return LiveFeedPriceDecoder.toObject(decoded, toObjectOptions) as LiveFeedPrice;
 }
 
 export function MarketDepthDecoder(data: Uint8Array): LiveFeedMarketDepth {
   const decoded = LiveFeedMarketDepthDecoder.decode(data);
-  return JSON.parse(JSON.stringify(decoded, null, 2)) as LiveFeedMarketDepth;
+  return LiveFeedMarketDepthDecoder.toObject(decoded, toObjectOptions) as LiveFeedMarketDepth;
 }
 
-export function EquityOrderUpdatesDecoder(data: Uint8Array): any {
+export function EquityOrderUpdatesDecoder(data: Uint8Array): LiveFeedOrderUpdate {
   const decoded = LiveFeedOrderUpdatesDecoder.decode(data);
-  return JSON.parse(JSON.stringify(decoded, null, 2)).orderDetailUpdateDto as LiveFeedOrderUpdate;
+  const obj = LiveFeedOrderUpdatesDecoder.toObject(decoded, toObjectOptions);
+  return obj.orderDetailUpdateDto as LiveFeedOrderUpdate;
 }
 
-export function FNOOrderUpdatesDecoder(data: Uint8Array): any {
+export function FNOOrderUpdatesDecoder(data: Uint8Array): LiveFeedFNOOrderUpdate {
   const decoded = LiveFeedOrderUpdatesDecoder.decode(data);
-  return JSON.parse(JSON.stringify(decoded, null, 2)).orderDetailUpdateDto as LiveFeedFNOOrderUpdate;
+  const obj = LiveFeedOrderUpdatesDecoder.toObject(decoded, toObjectOptions);
+  return obj.orderDetailUpdateDto as LiveFeedFNOOrderUpdate;
 }
 
-export function PositionOrderUpdatesDecoder(data: Uint8Array): any {
+export function PositionOrderUpdatesDecoder(data: Uint8Array): LiveFeedPositionUpdate {
   const decoded = LiveFeedPositionOrderUpdatesDecoder.decode(data);
-  return JSON.parse(JSON.stringify(decoded, null, 2)) as LiveFeedPositionUpdate;
+  return LiveFeedPositionOrderUpdatesDecoder.toObject(decoded, toObjectOptions) as LiveFeedPositionUpdate;
 }

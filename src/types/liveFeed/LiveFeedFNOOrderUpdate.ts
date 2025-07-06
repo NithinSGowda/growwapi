@@ -1,7 +1,7 @@
-import { LiveFeedOrderUpdate } from '..';
+import { LiveFeedOrderUpdate, Product, Segment } from '..';
 
 export interface LiveFeedFNOOrderUpdate extends LiveFeedOrderUpdate {
-  price: string;
-  product: string;
-  segment: string;
+  price: number;
+  product: Product;
+  segment: Segment;
 }

@@ -1,10 +1,5 @@
 syntax = "proto3";
 
-package groww.protobuf.fno.dto.fnoData;
-
-option java_package = "com.groww.fno.socket.update.commons.dto";
-option java_outer_classname = "FnoSocketUpdateDto";
-
 enum StocksProduct {
   CNC = 0;
   MIS = 1;
@@ -41,16 +36,16 @@ enum StockExchange {
 }
 
 message NseProto {
-  double creditQty = 1;
+  double creditQuantity = 1;
   double creditPrice = 2;
-  double debitQty = 3;
+  double debitQuantity = 3;
   double debitPrice = 4;
 }
 
 message BseProto {
-  double creditQty = 1;
+  double creditQuantity = 1;
   double creditPrice = 2;
-  double debitQty = 3;
+  double debitQuantity = 3;
   double debitPrice = 4;
 }
 

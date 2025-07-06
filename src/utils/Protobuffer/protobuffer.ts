@@ -12,4 +12,4 @@ const liveFeedPositionOrderUpdateProtoSchema = await protobuf.load(path.join(__d
 export const LiveFeedPriceDecoder = liveFeedProtoSchema.lookupType('StocksLivePriceProto');
 export const LiveFeedMarketDepthDecoder = liveFeedProtoSchema.lookupType('StocksMarketDepthProto');
 export const LiveFeedOrderUpdatesDecoder = liveFeedOrderUpdateProtoSchema.lookupType('OrderDetailsBroadCastDto');
-export const LiveFeedPositionOrderUpdatesDecoder = liveFeedPositionOrderUpdateProtoSchema.lookupType('PositionDetailProto');
+export const LiveFeedPositionOrderUpdatesDecoder = liveFeedPositionOrderUpdateProtoSchema.lookupType('PositionInfoProto');

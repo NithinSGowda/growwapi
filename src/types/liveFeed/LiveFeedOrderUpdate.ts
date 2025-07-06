@@ -1,13 +1,13 @@
 import { LiveFeedData } from '..';
 
 export interface LiveFeedOrderUpdate extends LiveFeedData {
-  avgFillPrice: string;
+  averageFillPrice: number;
   contractId: string;
   duration: string;
   exchange: string;
   exchangeOrderId: string;
-  filledQty: number;
+  filledQuantity: number;
   growwOrderId: string;
   orderStatus: string;
-  qty: number;
+  quantity: number;
 }

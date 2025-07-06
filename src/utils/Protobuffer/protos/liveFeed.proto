@@ -1,14 +1,12 @@
 syntax = "proto3";
 
-package stocksData.response;
-
 message BookProto {
   double price = 1;
-  double qty = 2;
+  double volume = 2;
 }
 
 message StocksLivePriceProto {
-  double tsInMillis = 1;
+  double timestamp = 1;
   double open = 2;
   double high = 3;
   double low = 4;
@@ -20,7 +18,7 @@ message StocksLivePriceProto {
   double avgPrice = 10;
   double highPriceRange = 11;
   double lowPriceRange = 12;
-  double ltp = 13;
+  double price = 13; //ltp
   double openInterest = 14;
   double lowTradeRange = 15;
   double highTradeRange = 16;
@@ -35,13 +33,13 @@ message StocksMarketDepthProto {
   double tsInMillis = 1;
 
   message BuyBookEntry {
-    int32 key = 1;
-    BookProto value = 2;
+    int32 offset = 1;
+    BookProto price = 2;
   }
 
   message SellBookEntry {
-    int32 key = 1;
-    BookProto value = 2;
+    int32 offset = 1;
+    BookProto price = 2;
   }
 
   repeated BuyBookEntry buyBook = 2;

@@ -1,19 +1,17 @@
 syntax = "proto3";
 
-package groww.orders;
-
 message StageAndTimeStamp {
   double timeStampFromMidNight = 1;
   string stageName = 2;
 }
 
 message OrderDetailUpdateDto {
-  int32 qty = 1;
+  int32 quantity = 1;
   int64 price = 2;
   int64 triggerPrice = 3;
-  int32 filledQty = 4;
+  int32 filledQuantity = 4;
   int32 remainingQty = 5;
-  int64 avgFillPrice = 6;
+  int64 averageFillPrice = 6;
   string growwOrderId = 7;
   string exchangeOrderId = 8;
   StocksOrderStatus orderStatus = 9;

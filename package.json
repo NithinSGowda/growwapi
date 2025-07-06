@@ -11,7 +11,6 @@
   "scripts": {
     "build": "tsc && npm run build:esm && cp -r src/utils/Protobuffer/protos dist/utils/Protobuffer/",
     "build:esm": "tsc -p tsconfig.esm.json && cp -r src/utils/Protobuffer/protos dist/utils/Protobuffer/",
-    "dev": "ts-node src/index.ts",
     "test": "jest",
     "lint": "eslint src --ext .ts",
     "prepare": "npm run build",
