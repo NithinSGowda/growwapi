@@ -1,34 +1,82 @@
 syntax = "proto3";
 
-message LiveFeedPrice {
-  string symbol = 1;
-  bool isActive = 3;
-  PriceData priceData = 4;
+package stocksData.response;
 
-  message PriceData {
-    double timestamp = 1;
-    double price = 13;
-  }
-}
-
-message LiveFeedMarketDepth {
-  string symbol = 1;
-  sint32 status = 3;
-  PriceData price_data = 5;
-
-  message PriceData {
-    double timestamp = 1;
-    repeated book buyBook = 2;
-    repeated book sellBook = 3;
-  }
-}
-
-message book {
-  uint32 offset = 1;
-  CandleValues values = 2;
-}
-
-message CandleValues {
+message BookProto {
   double price = 1;
-  double volume = 2;
+  double qty = 2;
+}
+
+message StocksLivePriceProto {
+  double tsInMillis = 1;
+  double open = 2;
+  double high = 3;
+  double low = 4;
+  double close = 5;
+  double volume = 6;
+  double value = 7;
+  double bidQty = 8;
+  double offerQty = 9;
+  double avgPrice = 10;
+  double highPriceRange = 11;
+  double lowPriceRange = 12;
+  double ltp = 13;
+  double openInterest = 14;
+  double lowTradeRange = 15;
+  double highTradeRange = 16;
+}
+
+message StocksLiveIndicesProto {
+  double tsInMillis = 1;
+  double value = 2;
+}
+
+message StocksMarketDepthProto {
+  double tsInMillis = 1;
+
+  message BuyBookEntry {
+    int32 key = 1;
+    BookProto value = 2;
+  }
+
+  message SellBookEntry {
+    int32 key = 1;
+    BookProto value = 2;
+  }
+
+  repeated BuyBookEntry buyBook = 2;
+  repeated SellBookEntry sellBook = 3;
+}
+
+message StocksSocketResponseProtoDto {
+  string symbol = 1;
+  StockSegmentProto segment = 2;
+  StockExchangeProto exchange = 3;
+
+  oneof livePoint {
+    StocksLivePriceProto stockLivePrice = 4;
+    StocksMarketDepthProto stocksMarketDepth = 5;
+    StocksLiveIndicesProto stocksLiveIndices = 6;
+  }
+}
+
+message StocksMarketInfoProto {
+  string message = 1;
+}
+
+enum StockExchangeProto {
+  BSE = 0;
+  NSE = 1;
+  MCX = 2;
+  MCXSX = 3;
+  NCDEX = 4;
+  GLOBAL = 5;
+  US = 6;
+}
+
+enum StockSegmentProto {
+  CASH = 0;
+  FNO = 1;
+  CURRENCY = 2;
+  COMMODITY = 3;
 }

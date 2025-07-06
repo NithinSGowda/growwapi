@@ -1,0 +1,95 @@
+syntax = "proto3";
+
+package groww.orders;
+
+message StageAndTimeStamp {
+  double timeStampFromMidNight = 1;
+  string stageName = 2;
+}
+
+message OrderDetailUpdateDto {
+  int32 qty = 1;
+  int64 price = 2;
+  int64 triggerPrice = 3;
+  int32 filledQty = 4;
+  int32 remainingQty = 5;
+  int64 avgFillPrice = 6;
+  string growwOrderId = 7;
+  string exchangeOrderId = 8;
+  StocksOrderStatus orderStatus = 9;
+  StocksOrderDuration duration = 10;
+  StockExchange exchange = 11;
+  StockSegment segment = 12;
+  StocksProduct product = 13;
+  StocksOrderType orderType = 14;
+  StocksBuySell buySell = 15;
+  string remark = 16;
+  string contractId = 22;
+  string guiOrderId = 23;
+}
+
+message OrderDetailsBroadCastDto {
+  repeated StageAndTimeStamp stageAndTimeStamp = 1;
+  OrderDetailUpdateDto orderDetailUpdateDto = 2;
+}
+
+enum StocksOrderStatus {
+    NEW = 0;
+    ACKED = 1;
+    TRIGGER_PENDING = 2;
+    APPROVED = 3;
+    REJECTED = 4;
+    FAILED = 5;
+    EXECUTED = 6;
+    DELIVERY_AWAITED = 7;
+    CANCELLED = 8;
+    CANCELLATION_REQUESTED = 9;
+    MODIFICATION_REQUESTED = 10;
+    COMPLETED = 11;
+}
+
+enum StocksOrderDuration {
+    IOC = 0;
+    DAY = 1;
+    GTD = 2;
+    GTC = 3;
+    EOS = 4;
+}
+
+enum StockExchange {
+    BSE = 0;
+    NSE = 1;
+    MCX = 2;
+    MCXSX = 3;
+    NCDEX = 4;
+    US = 5;
+}
+
+enum StockSegment {
+    CASH = 0;
+    FNO = 1;
+    CURRENCY = 2;
+    COMMODITY = 3;
+}
+
+enum StocksProduct {
+    CNC = 0;
+    MIS = 1;
+    CO = 2;
+    BO = 3;
+    NRML = 4;
+    ARB = 5;
+    MTF = 6;
+}
+
+enum StocksOrderType {
+    MKT = 0;
+    L = 1;
+    SL = 2;
+    SL_M = 3;
+}
+
+enum StocksBuySell {
+    B = 0;
+    S = 1;
+}

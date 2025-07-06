@@ -62,58 +62,25 @@ GROWW_FILECACHE_TTL=
 ```typescript
 import { GrowwAPI } from 'growwapi';
 
-const client = new GrowwAPI();
+const Groww = new GrowwAPI();
 ```
 
-### 3. Live Feed Example
+---
 
-```typescript
-import { GrowwAPI } from 'growwapi';
+## 📚 Examples
 
-const client = new GrowwAPI();
-const liveFeed = client.liveFeed;
+After connecting and authenticating, you can explore detailed usage for each feature in the [examples directory](./examples/):
 
-await liveFeed.connect();
+- [Order Management](./examples/order.md)
+- [Holdings](./examples/holdings.md)
+- [Historic Data](./examples/historicData.md)
+- [Instructions](./examples/instructions.md)
+- [Live Data](./examples/liveData.md)
+- [Live Feed](./examples/liveFeed.md)
+- [Margins](./examples/margins.md)
+- [Positions](./examples/positions.md)
 
-const livePriceFeed = liveFeed.subscribe(LiveFeedSubscriptionType.Price, 11195);
-const marketDepthFeed = liveFeed.subscribe(LiveFeedSubscriptionType.MarketDepth, 11195);
-
-const fnoOrderUpdates = liveFeed.subscribe(LiveFeedSubscriptionType.FnoOrderUpdates);
-
-await liveFeed.consume(livePriceFeed, handleData);
-await liveFeed.consume(marketDepthFeed, handleData);
-await liveFeed.consume(fnoOrderUpdates, handleData);
-
-function handleLiveFeed(data: LiveFeedCallbackData) {
-  console.log(data);
-}
-```
-
-### 4. Trading Example
-
-```typescript
-import { GrowwAPI } from 'growwapi';
-import { Exchange, OrderType, Product, Segment, TransactionType, Validity } from 'growwapi';
-
-const client = new GrowwAPI();
-
-// Fetch user holdings
-const holdings = await client.holdings.list();
-console.log(holdings);
-
-// Create an order
-client.orders.create({
-  exchange: Exchange.NSE,
-  orderType: OrderType.Limit,
-  product: Product.CNC,
-  quantity: 10,
-  segment: Segment.Cash,
-  tradingSymbol: 'RELIANCE',
-  transactionType: TransactionType.Buy,
-  validity: Validity.Day,
-  price: 2500,
-}).then(console.log).catch(console.error);
-```
+Each example demonstrates real-world usage and best practices for the respective module.
 
 ---
 

@@ -5,7 +5,7 @@ import { jwtAuthenticator } from 'nats';
 import { SOCKET_URL } from '../../config';
 import { Instructions } from '../../resources/instructions';
 import { InstructionsTypeParams } from '../../types/InstructionsTypeParams';
-import { equityOrderUpdatesDecoder, MarketDepthDecoder, PriceDecoder } from './Decoders';
+import { FNOOrderUpdatesDecoder, MarketDepthDecoder, EquityOrderUpdatesDecoder, PositionOrderUpdatesDecoder, PriceDecoder } from './Decoders';
 import { liveMarketParser, liveUpdatesParser } from './Parser';
 import { LiveFeedConnection, LiveFeedSubscriptionType } from '../../types';
 import { SocketCredentials } from '../../types/responses/SocketCredentials';
@@ -31,11 +31,11 @@ export function liveFeedDecoder(type: LiveFeedSubscriptionType, data: Uint8Array
   case LiveFeedSubscriptionType.MarketDepth:
     return MarketDepthDecoder(data);
   case LiveFeedSubscriptionType.FnoOrderUpdates:
-    return JSON.parse(data.toString());
+    return FNOOrderUpdatesDecoder(data);
   case LiveFeedSubscriptionType.FnoPositionUpdates:
-    return JSON.parse(data.toString());
+    return PositionOrderUpdatesDecoder(data);
   case LiveFeedSubscriptionType.EquityOrderUpdates:
-    return equityOrderUpdatesDecoder(data);
+    return EquityOrderUpdatesDecoder(data);
   default:
     throw new Error(`Unknown subscription type: ${type}`);
   }

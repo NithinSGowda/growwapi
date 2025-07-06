@@ -38,7 +38,6 @@ export class LiveFeed {
   async consume(subscription: Subscription, callback: (data: LiveFeedCallbackData) => void) {
     this.executeWithReconnectionStrategy(async () => {
       for await (const m of subscription) {
-        console.log(m.data, Buffer.from(m.data).toString('hex'));
         const feedType = this.subscriptions.get(m.subject) as LiveFeedSubscriptionType;
         const liveFeedData = liveFeedDecoder(feedType, m.data);
 

@@ -1,0 +1,81 @@
+syntax = "proto3";
+
+package groww.protobuf.fno.dto.fnoData;
+
+option java_package = "com.groww.fno.socket.update.commons.dto";
+option java_outer_classname = "FnoSocketUpdateDto";
+
+enum StocksProduct {
+  CNC = 0;
+  MIS = 1;
+  CO = 2;
+  BO = 3;
+  NRML = 4;
+  ARB = 5;
+  MTF = 6;
+  _unknown = 7;
+}
+
+enum EquityType {
+  STOCKS = 0;
+  FUTURE = 1;
+  OPTION = 2;
+  ETF = 3;
+  INDEX = 4;
+  BONDS = 5;
+}
+
+enum EquityAsset {
+  EQUITY_ASSET_STOCKS = 0;
+  EQUITY_ASSET_INDICES = 1;
+}
+
+enum StockExchange {
+  BSE = 0;
+  NSE = 1;
+  MCX = 2;
+  MCXSX = 3;
+  NCDEX = 4;
+  GLOBAL = 5;
+  US = 6;
+}
+
+message NseProto {
+  double creditQty = 1;
+  double creditPrice = 2;
+  double debitQty = 3;
+  double debitPrice = 4;
+}
+
+message BseProto {
+  double creditQty = 1;
+  double creditPrice = 2;
+  double debitQty = 3;
+  double debitPrice = 4;
+}
+
+message PositionInfoProto {
+  string symbolIsin = 1;
+  BseProto BSE = 2;
+  NseProto NSE = 3;
+}
+
+message SymbolInfoProto {
+  int64 trTimeStamp = 1;
+  string searchId = 2;
+  StocksProduct stocksProduct = 3;
+  string contractId = 4;
+  EquityType equityType = 5;
+  string displayName = 6;
+  string underlyingId = 7;
+  int64 nseMarketLot = 8;
+  int64 bseMarketLot = 9;
+  EquityAsset underlyingAssetType = 10;
+  int64 freezeQty = 11;
+  StockExchange exchange = 12;
+}
+
+message PositionDetailProto {
+  SymbolInfoProto symbolData = 1;
+  PositionInfoProto positionInfo = 2;
+}
