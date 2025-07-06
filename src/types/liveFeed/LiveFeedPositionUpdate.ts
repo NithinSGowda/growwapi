@@ -1,5 +1,3 @@
-import { LiveFeedData } from '..';
-
 export interface ExchangePosition {
   creditQuantity?: number;
   creditPrice?: number;
@@ -7,7 +5,7 @@ export interface ExchangePosition {
   debitPrice?: number;
 }
 
-export interface LiveFeedPositionUpdate extends LiveFeedData {
+export interface LiveFeedPositionUpdate{
   symbolIsin: string;
   exchangePosition: {
     BSE: ExchangePosition;

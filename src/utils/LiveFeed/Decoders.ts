@@ -1,5 +1,4 @@
 import { LiveFeedMarketDepth, LiveFeedOrderUpdate, LiveFeedPositionUpdate, LiveFeedPrice } from '../../types';
-import { LiveFeedFNOOrderUpdate } from '../../types/liveFeed/LiveFeedFNOOrderUpdate';
 import {
   LiveFeedMarketDepthDecoder,
   LiveFeedOrderUpdatesDecoder,
@@ -25,10 +24,10 @@ export function EquityOrderUpdatesDecoder(data: Uint8Array): LiveFeedOrderUpdate
   return obj.orderDetailUpdateDto as LiveFeedOrderUpdate;
 }
 
-export function FNOOrderUpdatesDecoder(data: Uint8Array): LiveFeedFNOOrderUpdate {
+export function FNOOrderUpdatesDecoder(data: Uint8Array): LiveFeedOrderUpdate {
   const decoded = LiveFeedOrderUpdatesDecoder.decode(data);
   const obj = LiveFeedOrderUpdatesDecoder.toObject(decoded, toObjectOptions);
-  return obj.orderDetailUpdateDto as LiveFeedFNOOrderUpdate;
+  return obj.orderDetailUpdateDto as LiveFeedOrderUpdate;
 }
 
 export function PositionOrderUpdatesDecoder(data: Uint8Array): LiveFeedPositionUpdate {

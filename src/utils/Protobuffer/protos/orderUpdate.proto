@@ -10,7 +10,7 @@ message OrderDetailUpdateDto {
   int64 price = 2;
   int64 triggerPrice = 3;
   int32 filledQuantity = 4;
-  int32 remainingQty = 5;
+  int32 remainingQuantity = 5;
   int64 averageFillPrice = 6;
   string growwOrderId = 7;
   string exchangeOrderId = 8;
