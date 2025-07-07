@@ -52,8 +52,8 @@ message StocksSocketResponseProtoDto {
   StockExchangeProto exchange = 3;
 
   oneof livePoint {
-    StocksLivePriceProto stockLivePrice = 4;
-    StocksMarketDepthProto stocksMarketDepth = 5;
+    StocksLivePriceProto priceData = 4;
+    StocksMarketDepthProto marketDepthData = 5;
     StocksLiveIndicesProto stocksLiveIndices = 6;
   }
 }

@@ -32,5 +32,5 @@ export function FNOOrderUpdatesDecoder(data: Uint8Array): LiveFeedOrderUpdate {
 
 export function PositionOrderUpdatesDecoder(data: Uint8Array): LiveFeedPositionUpdate {
   const decoded = LiveFeedPositionOrderUpdatesDecoder.decode(data);
-  return LiveFeedPositionOrderUpdatesDecoder.toObject(decoded, toObjectOptions) as LiveFeedPositionUpdate;
+  return LiveFeedPositionOrderUpdatesDecoder.toObject(decoded, toObjectOptions).positionInfo as LiveFeedPositionUpdate;
 }

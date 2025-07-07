@@ -1,4 +1,8 @@
+import { Exchange } from '../enums/Exchange';
+import { Segment } from '../enums/Segment';
+
 export interface LiveFeedData {
   symbol: string;
-  isActive?: boolean;
+  segment: Segment;
+  exchange: Exchange;
 }
