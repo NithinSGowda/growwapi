@@ -62,100 +62,116 @@ GROWW_FILECACHE_TTL=
 ```typescript
 import { GrowwAPI } from 'growwapi';
 
-const client = new GrowwAPI();
+const Groww = new GrowwAPI();
 ```
 
-### 3. Live Feed Example
+---
 
-```typescript
-import { GrowwAPI } from 'growwapi';
+## 📚 Examples
 
-const client = new GrowwAPI();
-const liveFeed = client.liveFeed;
+After connecting and authenticating, you can explore detailed usage for each feature in the [examples directory](./examples/)
 
-await liveFeed.connect();
+- [Order Management](./examples/order.md)
+- [Holdings](./examples/holdings.md)
+- [Historic Data](./examples/historicData.md)
+- [Instructions](./examples/instructions.md)
+- [Live Data](./examples/liveData.md)
+- [Live Feed](./examples/liveFeed.md)
+- [Margins](./examples/margins.md)
+- [Positions](./examples/positions.md)
 
-const livePriceFeed = liveFeed.subscribe(LiveFeedSubscriptionType.Price, 11195);
-const marketDepthFeed = liveFeed.subscribe(LiveFeedSubscriptionType.MarketDepth, 11195);
-
-const fnoOrderUpdates = liveFeed.subscribe(LiveFeedSubscriptionType.FnoOrderUpdates);
-
-await liveFeed.consume(livePriceFeed, handleData);
-await liveFeed.consume(marketDepthFeed, handleData);
-await liveFeed.consume(fnoOrderUpdates, handleData);
-
-function handleLiveFeed(data: LiveFeedCallbackData) {
-  console.log(data);
-}
-```
-
-### 4. Trading Example
-
-```typescript
-import { GrowwAPI } from 'growwapi';
-import { Exchange, OrderType, Product, Segment, TransactionType, Validity } from 'growwapi';
-
-const client = new GrowwAPI();
-
-// Fetch user holdings
-const holdings = await client.holdings.list();
-console.log(holdings);
-
-// Create an order
-client.orders.create({
-  exchange: Exchange.NSE,
-  orderType: OrderType.Limit,
-  product: Product.CNC,
-  quantity: 10,
-  segment: Segment.Cash,
-  tradingSymbol: 'RELIANCE',
-  transactionType: TransactionType.Buy,
-  validity: Validity.Day,
-  price: 2500,
-}).then(console.log).catch(console.error);
-```
+Each example demonstrates real-world usage and best practices for the respective module.
 
 ---
 
 ## 📚 API Reference
 
-### Authentication
-- `Auth.generateToken()` – Generates a new authentication token.
-- `Auth.refreshToken()` – Refreshes the current authentication token.
+### Authentication (`Auth`)
+- `Auth.generateToken(): Promise<AuthTokenResponse>`  
+  Generates a new authentication token.
+- `Auth.refreshToken(): Promise<AuthTokenResponse>`  
+  Refreshes the current authentication token.
 
-### Live Feed & Data
-- `LiveFeed.connect(callback)` – Establishes a WebSocket connection for real-time data.
-- `LiveFeed.subscribe(instrumentId)` – Subscribes to real-time data for a specific instrument.
-- `LiveFeed.consume(subscription)` – Starts consuming data from a subscription.
-- `LiveFeed.disconnect()` – Disconnects from the WebSocket.
-- `HistoricData.get(params)` – Fetches historical market data.
-- `LiveData.get(params)` – Fetches current market data for specified instruments.
+---
 
-### Instruments & Instructions
-- `Instructions.getInstructions()` – Fetches the full instructions CSV file.
-- `Instructions.getFilteredInstructions(params)` – Fetches filtered instructions based on provided parameters.
+### Live Feed (`LiveFeed`)
+- `LiveFeed.connect(callback: (data) => void): void`  
+  Establishes a WebSocket connection for real-time data.
+- `LiveFeed.subscribe(instrumentId: string): void`  
+  Subscribes to real-time data for a specific instrument.
+- `LiveFeed.consume(subscription: string): void`  
+  Starts consuming data from a subscription.
+- `LiveFeed.disconnect(): void`  
+  Disconnects from the WebSocket.
+
+---
+
+### Live Data (`LiveData`)
+- `LiveData.getQuote(params: GetQuoteParams): Promise<GetQuoteResponse>`  
+  Fetches current quote for a trading symbol.
+- `LiveData.getLTP(params: GetLTPParams): Promise<GetLTPResponse>`  
+  Fetches last traded price for one or more symbols.
+- `LiveData.getOHLC(params: GetOHLCParams): Promise<GetOHLCResponse>`  
+  Fetches OHLC data for one or more symbols.
+
+---
+
+### Historic Data (`HistoricData`)
+- `HistoricData.get(params: HistoricDataParams): Promise<HistoricDataResponse>`  
+  Fetches historical candle data for a trading symbol.
+
+---
+
+### Instructions (`Instructions`)
+- `Instructions.getInstructions(): Promise<InstructionsResponse>`  
+  Fetches the full instructions CSV file.
+- `Instructions.getFilteredInstructions(params: InstructionsTypeParams): Promise<InstructionsResponse>`  
+  Fetches filtered instructions based on provided parameters.
+
+---
 
 ### Portfolio & Trading
-#### Holdings
-- `Holdings.list()` – Fetches user holdings.
 
-#### Margins
-- `Margins.details()` – Fetches margin details for the user.
-- `Margins.requiredForOrder(params)` – Calculates margins required for an order.
+#### Holdings (`Holdings`)
+- `Holdings.list(): Promise<HoldingsResponse>`  
+  Fetches user holdings.
 
-#### Orders
-- `Orders.create(params)` – Creates a new order.
-- `Orders.modify(params)` – Modifies an existing order.
-- `Orders.cancel(params)` – Cancels an order.
-- `Orders.getTrades(params)` – Fetches trade details for an order.
-- `Orders.status(params)` – Fetches the status of an order.
-- `Orders.statusByReference(params)` – Fetches the status of an order by reference ID.
-- `Orders.getOrders(params)` – Lists all orders.
-- `Orders.details(params)` – Fetches details of an order.
+#### Margins (`Margins`)
+- `Margins.details(): Promise<MarginsResponse>`  
+  Fetches margin details for the user.
+- `Margins.requiredForOrder(params: MarginsRequiredParams): Promise<MarginsRequiredResponse>`  
+  Calculates margins required for an order.
 
-#### Positions
-- `Positions.user(params)` – Fetches user positions.
-- `Positions.tradingSymbol(params)` – Fetches details of a trading symbol.
+#### Orders (`Orders`)
+- `Orders.create(params: CreateOrderParams): Promise<CreateOrderResponse>`  
+  Creates a new order.
+- `Orders.modify(params: ModifyOrderParams): Promise<ModifyOrderResponse>`  
+  Modifies an existing order.
+- `Orders.cancel(params: CancelOrderParams): Promise<CancelOrderResponse>`  
+  Cancels an order.
+- `Orders.getTrades(params: GetTradesParams): Promise<GetTradesResponse>`  
+  Fetches trade details for an order.
+- `Orders.status(params: OrderStatusParams): Promise<OrderStatusResponse>`  
+  Fetches the status of an order.
+- `Orders.statusByReference(params: OrderStatusByReferenceParams): Promise<OrderStatusResponse>`  
+  Fetches the status of an order by reference ID.
+- `Orders.getOrders(params: ListOrderParams): Promise<OrderResponse[]>`  
+  Lists all orders.
+- `Orders.details(params: OrderDetailsParams): Promise<OrderResponse>`  
+  Fetches details of an order.
+
+#### Positions (`Positions`)
+- `Positions.user(params: BaseParams): Promise<PositionsResponse>`  
+  Fetches user positions.
+- `Positions.tradingSymbol(params: TradingSymbolParams): Promise<TradingSymbolResponse>`  
+  Fetches details of a trading symbol.
+
+---
+
+### Types
+
+All request and response types are available in the `types` directory and are strongly typed for TypeScript.  
+See the [`types`](./src/types/) folder for details.
 
 ---
 
@@ -163,7 +179,6 @@ client.orders.create({
 
 ### Scripts
 - `npm run build`: Builds the project.
-- `npm run dev`: Runs the project in development mode.
 - `npm run test`: Runs tests.
 - `npm run lint`: Lints the code.
 - `npm generate-exports`: Generates exports for all types.

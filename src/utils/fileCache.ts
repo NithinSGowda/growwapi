@@ -34,7 +34,7 @@ async function deleteFileIfExists(filePath: string): Promise<void> {
   try {
     await fsPromises.unlink(filePath);
   } catch {
-    console.warn(`Failed to delete file: ${filePath}. It may not exist.`);
+    return;
   }
 }
 

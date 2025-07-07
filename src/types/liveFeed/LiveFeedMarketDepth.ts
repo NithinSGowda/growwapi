@@ -11,7 +11,7 @@ interface Price {
 }
 
 export interface LiveFeedMarketDepth extends LiveFeedData {
-  priceData: {
+  marketDepth: {
     buyBook: Depth[];
     sellBook: Depth[];
   }

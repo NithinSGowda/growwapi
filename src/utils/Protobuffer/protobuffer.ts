@@ -5,8 +5,11 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const protoSchema = await protobuf.load(path.join(__dirname, './protos/liveFeed.proto'));
+const liveFeedProtoSchema = await protobuf.load(path.join(__dirname, './protos/liveFeed.proto'));
+const liveFeedOrderUpdateProtoSchema = await protobuf.load(path.join(__dirname, './protos/orderUpdate.proto'));
+const liveFeedPositionOrderUpdateProtoSchema = await protobuf.load(path.join(__dirname, './protos/positionSocket.proto'));
 
-export const LiveFeedPriceDecoder = protoSchema.lookupType('LiveFeedPrice');
-export const LiveFeedMarketDepthDecoder = protoSchema.lookupType('LiveFeedMarketDepth');
-// export const EquityOrderUpdatesDecoder = protoSchema.lookupType('EquityOrderUpdates');
+export const LiveFeedPriceDecoder = liveFeedProtoSchema.lookupType('StocksSocketResponseProtoDto');
+export const LiveFeedMarketDepthDecoder = liveFeedProtoSchema.lookupType('StocksSocketResponseProtoDto');
+export const LiveFeedOrderUpdatesDecoder = liveFeedOrderUpdateProtoSchema.lookupType('OrderDetailsBroadCastDto');
+export const LiveFeedPositionOrderUpdatesDecoder = liveFeedPositionOrderUpdateProtoSchema.lookupType('PositionDetailProto');

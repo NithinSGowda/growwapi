@@ -1,16 +1,36 @@
-import { LiveFeedMarketDepth, LiveFeedPrice } from '../../types';
-import { LiveFeedMarketDepthDecoder, LiveFeedPriceDecoder } from '../Protobuffer/protobuffer';
+import { LiveFeedMarketDepth, LiveFeedOrderUpdate, LiveFeedPositionUpdate, LiveFeedPrice } from '../../types';
+import {
+  LiveFeedMarketDepthDecoder,
+  LiveFeedOrderUpdatesDecoder,
+  LiveFeedPositionOrderUpdatesDecoder,
+  LiveFeedPriceDecoder
+} from '../Protobuffer/protobuffer';
+
+const toObjectOptions = { longs: Number, enums: String, defaults: true, arrays: true, objects: true };
 
 export function PriceDecoder(data: Uint8Array): LiveFeedPrice {
   const decoded = LiveFeedPriceDecoder.decode(data);
-  return JSON.parse(JSON.stringify(decoded, null, 2)) as LiveFeedPrice;
+  return LiveFeedPriceDecoder.toObject(decoded, toObjectOptions) as LiveFeedPrice;
 }
 
 export function MarketDepthDecoder(data: Uint8Array): LiveFeedMarketDepth {
   const decoded = LiveFeedMarketDepthDecoder.decode(data);
-  return JSON.parse(JSON.stringify(decoded, null, 2)) as LiveFeedMarketDepth;
+  return LiveFeedMarketDepthDecoder.toObject(decoded, toObjectOptions) as LiveFeedMarketDepth;
 }
 
-export function equityOrderUpdatesDecoder(data: Uint8Array): any {
-  console.log(data);
+export function EquityOrderUpdatesDecoder(data: Uint8Array): LiveFeedOrderUpdate {
+  const decoded = LiveFeedOrderUpdatesDecoder.decode(data);
+  const obj = LiveFeedOrderUpdatesDecoder.toObject(decoded, toObjectOptions);
+  return obj.orderDetailUpdateDto as LiveFeedOrderUpdate;
+}
+
+export function FNOOrderUpdatesDecoder(data: Uint8Array): LiveFeedOrderUpdate {
+  const decoded = LiveFeedOrderUpdatesDecoder.decode(data);
+  const obj = LiveFeedOrderUpdatesDecoder.toObject(decoded, toObjectOptions);
+  return obj.orderDetailUpdateDto as LiveFeedOrderUpdate;
+}
+
+export function PositionOrderUpdatesDecoder(data: Uint8Array): LiveFeedPositionUpdate {
+  const decoded = LiveFeedPositionOrderUpdatesDecoder.decode(data);
+  return LiveFeedPositionOrderUpdatesDecoder.toObject(decoded, toObjectOptions).positionInfo as LiveFeedPositionUpdate;
 }
