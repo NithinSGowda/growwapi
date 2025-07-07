@@ -62,8 +62,8 @@ export class LiveFeed {
     retryStrategy(
       this.connection,
       this.retryCount,
-      this.disconnect,
-      this.reconnect,
+      () => this.disconnect(),
+      () => this.reconnect(),
       async () => {
         for await (const m of subscription) {
           const feedType = this.subscriptions.get(m.subject)?.type as LiveFeedSubscriptionType;
