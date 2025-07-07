@@ -18,7 +18,7 @@ message StocksLivePriceProto {
   double avgPrice = 10;
   double highPriceRange = 11;
   double lowPriceRange = 12;
-  double price = 13; //ltp
+  double price = 13;
   double openInterest = 14;
   double lowTradeRange = 15;
   double highTradeRange = 16;
@@ -53,7 +53,7 @@ message StocksSocketResponseProtoDto {
 
   oneof livePoint {
     StocksLivePriceProto priceData = 4;
-    StocksMarketDepthProto marketDepthData = 5;
+    StocksMarketDepthProto marketDepth = 5;
     StocksLiveIndicesProto stocksLiveIndices = 6;
   }
 }
