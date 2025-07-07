@@ -10,6 +10,8 @@ import { liveMarketParser, liveUpdatesParser } from './Parser';
 import { LiveFeedConnection, LiveFeedSubscriptionType } from '../../types';
 import { SocketCredentials } from '../../types/responses/SocketCredentials';
 
+const MAX_RETRY_COUNT = 10;
+
 const keyPair = createUser();
 const publicKey = keyPair.getPublicKey();
 
@@ -53,4 +55,39 @@ function buildSubscriptionTopic(type: LiveFeedSubscriptionType, subscriptionId: 
   if (!instruction) return liveUpdatesParser(type, subscriptionId);
 
   return liveMarketParser(type, instruction);
+}
+
+export async function retryStrategy(
+  connection: LiveFeedConnection | null,
+  retryCount: number,
+  disconnect: () => Promise<void>,
+  reconnect: () => Promise<void>,
+  action: () => Promise<void>,
+): Promise<void> {
+  if (!connection) {
+    console.error('Connection is not established. Please connect first.');
+    return;
+  }
+
+  try {
+    await action();
+  } catch {
+    try {
+      await disconnect();
+    } catch { /* ignore */ }
+
+    const delay = Math.min(1000 * Math.pow(2, retryCount), 30000);
+    setTimeout(async () => {
+      retryCount++;
+      if (retryCount < MAX_RETRY_COUNT) {
+        await retryStrategy(
+          connection,
+          retryCount,
+          disconnect,
+          reconnect,
+          reconnect,
+        );
+      }
+    }, delay);
+  }
 }
