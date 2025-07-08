@@ -54,7 +54,6 @@ export class LiveFeed {
     if (this.connection) {
       subscription.unsubscribe();
       this.subscriptions.delete(topic);
-      console.log(`Unsubscribed from topic: ${topic}`);
     }
   }
 
