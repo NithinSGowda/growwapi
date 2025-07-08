@@ -87,6 +87,8 @@ Optional environment variables:
 - `GROWW_API_BASE_URL`: Override default base URL (default: `https://api.groww.in/`)
 - `GROWW_API_VERSION`: Override API version (default: `v1`)
 - `GROWW_FILECACHE_TTL`: Override file cache TTL in milliseconds (default: 24 hours)
+- `GROWW_LIVE_FEED_MAX_RETRY_COUNT`: Maximum retry count for live feed reconnections (default: 10)
+- `GROWW_LIVE_FEED_MAX_RETRY_DURATION`: Maximum retry duration for live feed reconnections in milliseconds (default: 30 seconds)
 
 ## Development Guidelines
 
