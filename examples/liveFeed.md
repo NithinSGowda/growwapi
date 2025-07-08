@@ -15,10 +15,6 @@ await liveFeed.connect();
 ## 2. Subscribe to Live Feed Channels
 
 ```typescript
-function handleData(data: LiveFeedCallback) {
-  console.log(data);
-}
-
 const equityOrderUpdatesSubscription = await liveFeed.subscribe(LiveFeedSubscriptionType.EquityOrderUpdates);
 const fnoOrderUpdatesSubscription = await liveFeed.subscribe(LiveFeedSubscriptionType.FnoOrderUpdates);
 const fnoPositionUpdatesSubscription = await liveFeed.subscribe(LiveFeedSubscriptionType.FnoPositionUpdates);
@@ -31,11 +27,16 @@ const marketDepthSubscription = await liveFeed.subscribe(LiveFeedSubscriptionTyp
 ## 3. Consume Live Feed Data
 
 ```typescript
-if (equityOrderUpdatesSubscription) liveFeed.consume(equityOrderUpdatesSubscription, handleData);
-if (fnoOrderUpdatesSubscription) liveFeed.consume(fnoOrderUpdatesSubscription, handleData);
-if (fnoPositionUpdatesSubscription) liveFeed.consume(fnoPositionUpdatesSubscription, handleData);
-if (priceSubscription) liveFeed.consume(priceSubscription, handleData);
-if (marketDepthSubscription) liveFeed.consume(marketDepthSubscription, handleData);
+function handleData(data: LiveFeedCallback) {
+  console.log(data);
+}
+
+equityOrderUpdatesSubscription?.consume(handleData);
+// Similarly
+fnoOrderUpdatesSubscription?.consume(handleData);
+fnoPositionUpdatesSubscription?.consume(handleData);
+priceSubscription?.consume(handleData);
+marketDepthSubscription?.consume(handleData);
 ```
 
 ---
@@ -43,11 +44,11 @@ if (marketDepthSubscription) liveFeed.consume(marketDepthSubscription, handleDat
 ## 4. Unsubscribe from Channels
 
 ```typescript
-if (equityOrderUpdatesSubscription) liveFeed.unsubscribe(equityOrderUpdatesSubscription);
-if (fnoOrderUpdatesSubscription) liveFeed.unsubscribe(fnoOrderUpdatesSubscription);
-if (fnoPositionUpdatesSubscription) liveFeed.unsubscribe(fnoPositionUpdatesSubscription);
-if (priceSubscription) liveFeed.unsubscribe(priceSubscription);
-if (marketDepthSubscription) liveFeed.unsubscribe(marketDepthSubscription);
+equityOrderUpdatesSubscription?.unsubscribe();
+fnoOrderUpdatesSubscription?.unsubscribe();
+fnoPositionUpdatesSubscription?.unsubscribe();
+priceSubscription?.unsubscribe();
+marketDepthSubscription?.unsubscribe();
 ```
 
 ---

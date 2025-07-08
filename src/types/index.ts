@@ -19,6 +19,7 @@ export * from './liveFeed/LiveFeedMarketDepth';
 export * from './liveFeed/LiveFeedOrderUpdate';
 export * from './liveFeed/LiveFeedPositionUpdate';
 export * from './liveFeed/LiveFeedPrice';
+export * from './liveFeed/subscription';
 export * from './requests/CancelOrderParams';
 export * from './requests/CreateOrderParams';
 export * from './requests/GetLTPParams';

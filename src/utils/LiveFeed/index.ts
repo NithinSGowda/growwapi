@@ -2,7 +2,7 @@ import { createUser } from 'ts-nkeys';
 import { Auth } from '../../resources/auth';
 import { connect } from 'nats.ws';
 import { jwtAuthenticator } from 'nats';
-import { SOCKET_URL } from '../../config';
+import { LIVE_FEED_MAX_RETRY_COUNT, LIVE_FEED_MAX_RETRY_DURATION, SOCKET_URL } from '../../config';
 import { Instructions } from '../../resources/instructions';
 import { InstructionsTypeParams } from '../../types/InstructionsTypeParams';
 import { FNOOrderUpdatesDecoder, MarketDepthDecoder, EquityOrderUpdatesDecoder, PositionOrderUpdatesDecoder, PriceDecoder } from './Decoders';
@@ -53,4 +53,39 @@ function buildSubscriptionTopic(type: LiveFeedSubscriptionType, subscriptionId: 
   if (!instruction) return liveUpdatesParser(type, subscriptionId);
 
   return liveMarketParser(type, instruction);
+}
+
+export async function retryStrategy(
+  connection: LiveFeedConnection | null,
+  retryCount: number,
+  disconnect: () => Promise<void>,
+  reconnect: () => Promise<void>,
+  action: () => Promise<void>,
+): Promise<void> {
+  if (!connection) {
+    console.error('Connection is not established. Please connect first.');
+    return;
+  }
+
+  try {
+    await action();
+  } catch {
+    try {
+      await disconnect();
+    } catch { /* ignore */ }
+
+    const delay = Math.min(1000 * Math.pow(2, retryCount), LIVE_FEED_MAX_RETRY_DURATION);
+    setTimeout(async () => {
+      retryCount++;
+      if (retryCount < LIVE_FEED_MAX_RETRY_COUNT) {
+        await retryStrategy(
+          connection,
+          retryCount,
+          disconnect,
+          reconnect,
+          reconnect,
+        );
+      }
+    }, delay);
+  }
 }
