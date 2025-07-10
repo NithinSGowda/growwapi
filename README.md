@@ -59,12 +59,33 @@ GROWW_LIVE_FEED_MAX_RETRY_COUNT=
 GROWW_LIVE_FEED_MAX_RETRY_DURATION=
 ```
 
-### 2. Basic Usage
+### 2. Sample Implementation
+
+Here's an example of how to initialize the SDK, fetch your holdings, and place an order:
 
 ```typescript
-import { GrowwAPI } from 'growwapi';
+import { GrowwAPI, Exchange, Segment, Product, OrderType, TransactionType, Validity } from 'growwapi';
 
-const Groww = new GrowwAPI();
+const groww = new GrowwAPI();
+
+const holdings = await groww.holdings.list();
+console.log('Holdings:', holdings);
+
+const orderDetails = {
+  tradingSymbol: 'RELIANCE',
+  quantity: 1,
+  price: 2800,
+  triggerPrice: 0,
+  validity: Validity.Day,
+  exchange: Exchange.NSE,
+  segment: Segment.CASH,
+  product: Product.CNC,
+  orderType: OrderType.Limit,
+  transactionType: TransactionType.Buy,
+};
+
+const order = await groww.orders.create(orderDetails);
+console.log('Order placed successfully:', order);
 ```
 
 ---
@@ -205,6 +226,14 @@ npm run lint
 - **GrowwAPI**: Main class that initializes and provides access to all service modules
 - **Resources**: Independent modules for different API functionalities:
   - Auth, LiveFeed, HistoricData, Holdings, Instructions, LiveData, Margins, Orders, Positions
+
+---
+
+## 🤔 Troubleshooting
+
+- **Authentication Errors**: Ensure your `GROWW_API_KEY` and `GROWW_API_SECRET` are correct.
+- **Invalid Parameters**: Double-check the parameters you are passing to the methods. Refer to the `types` directory for detailed information on the required and optional parameters.
+- **Network Issues**: Ensure you have a stable internet connection. The SDK will attempt to retry failed requests, but a persistent network issue may cause problems.
 
 ---
 

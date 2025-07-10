@@ -7,7 +7,7 @@ This example demonstrates how to use the `GrowwAPI` NodeJS SDK to fetch your cur
 ## 1. List Holdings
 
 ```typescript
-const holdings = await Groww.holdings.list();
+const holdings = await groww.holdings.list();
 console.log('Holdings:', holdings);
 ```
 
