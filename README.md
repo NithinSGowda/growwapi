@@ -81,26 +81,13 @@ Once your environment is set up and the SDK is initialized, you can explore deta
 - [Live Feed](./examples/liveFeed.md)
 - [Margins](./examples/margins.md)
 - [Positions](./examples/positions.md)
+- [Authentication](./examples/auth.md)
 
 Each example demonstrates real-world usage and best practices for the respective module.
 
 ---
 
-### Advanced Usage
-
-- [Authentication](./examples/auth.md)
-
----
-
 ## 📚 API Reference
-
-### Authentication (`Auth`)
-- `Auth.generateToken(): Promise<AuthTokenResponse>`  
-  Generates a new authentication token.
-- `Auth.refreshToken(): Promise<AuthTokenResponse>`  
-  Refreshes the current authentication token.
-
----
 
 ### Live Feed (`LiveFeed`)
 - `LiveFeed.connect(callback: (data) => void): void`  
@@ -173,6 +160,16 @@ Each example demonstrates real-world usage and best practices for the respective
   Fetches user positions.
 - `Positions.tradingSymbol(params: TradingSymbolParams): Promise<TradingSymbolResponse>`  
   Fetches details of a trading symbol.
+
+---
+
+### Advanced Usage
+
+### Authentication (`Auth`)
+- `Auth.generateToken(): Promise<AuthTokenResponse>`  
+  Generates a new authentication token.
+- `Auth.refreshToken(): Promise<AuthTokenResponse>`  
+  Refreshes the current authentication token.
 
 ---
 
