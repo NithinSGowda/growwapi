@@ -25,7 +25,7 @@ message StocksLivePriceProto {
 }
 
 message StocksLiveIndicesProto {
-  double tsInMillis = 1;
+  double timestamp = 1;
   double value = 2;
 }
 
@@ -54,7 +54,7 @@ message StocksSocketResponseProtoDto {
   oneof livePoint {
     StocksLivePriceProto priceData = 4;
     StocksMarketDepthProto marketDepth = 5;
-    StocksLiveIndicesProto stocksLiveIndices = 6;
+    StocksLiveIndicesProto indexData = 6;
   }
 }
 

@@ -6,8 +6,8 @@ import { LIVE_FEED_MAX_RETRY_COUNT, LIVE_FEED_MAX_RETRY_DURATION, SOCKET_URL } f
 import { Instructions } from '../../resources/instructions';
 import { InstructionsTypeParams } from '../../types/InstructionsTypeParams';
 import { FNOOrderUpdatesDecoder, MarketDepthDecoder, EquityOrderUpdatesDecoder, PositionOrderUpdatesDecoder, PriceDecoder } from './Decoders';
-import { liveMarketParser, liveUpdatesParser } from './Parser';
-import { LiveFeedConnection, LiveFeedSubscriptionType } from '../../types';
+import { liveIndexParser, liveMarketParser, liveUpdatesParser } from './Parser';
+import { InstrumentType, LiveFeedConnection, LiveFeedSubscriptionType } from '../../types';
 import { SocketCredentials } from '../../types/responses/SocketCredentials';
 
 const keyPair = createUser();
@@ -28,6 +28,8 @@ export function liveFeedDecoder(type: LiveFeedSubscriptionType, data: Uint8Array
   switch (type) {
   case LiveFeedSubscriptionType.Price:
     return PriceDecoder(data);
+  case LiveFeedSubscriptionType.Index:
+    return PriceDecoder(data);
   case LiveFeedSubscriptionType.MarketDepth:
     return MarketDepthDecoder(data);
   case LiveFeedSubscriptionType.FnoOrderUpdates:
@@ -41,7 +43,7 @@ export function liveFeedDecoder(type: LiveFeedSubscriptionType, data: Uint8Array
   }
 }
 
-export async function generateSubscriptionTopic(type: LiveFeedSubscriptionType, subscriptionId: string, exchangeToken?: number): Promise<string> {
+export async function generateSubscriptionTopic(type: LiveFeedSubscriptionType, subscriptionId: string, exchangeToken?: number | string): Promise<string> {
   const instruction = exchangeToken ? (await (new Instructions).getFilteredInstructions({
     exchangeToken: exchangeToken,
   }))[0] : null;
@@ -51,6 +53,7 @@ export async function generateSubscriptionTopic(type: LiveFeedSubscriptionType, 
 
 function buildSubscriptionTopic(type: LiveFeedSubscriptionType, subscriptionId: string, instruction: InstructionsTypeParams | null): string {
   if (!instruction) return liveUpdatesParser(type, subscriptionId);
+  if (instruction.instrumentType == InstrumentType.IDX) return liveIndexParser(type, instruction);
 
   return liveMarketParser(type, instruction);
 }

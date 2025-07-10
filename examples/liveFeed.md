@@ -16,6 +16,7 @@ await liveFeed.connect();
 
 ```typescript
 const equityOrderUpdatesSubscription = await liveFeed.subscribe(LiveFeedSubscriptionType.EquityOrderUpdates);
+const indexSubscription = await liveFeed.subscribe(LiveFeedSubscriptionType.Index, 'NIFTY');
 const fnoOrderUpdatesSubscription = await liveFeed.subscribe(LiveFeedSubscriptionType.FnoOrderUpdates);
 const fnoPositionUpdatesSubscription = await liveFeed.subscribe(LiveFeedSubscriptionType.FnoPositionUpdates);
 const priceSubscription = await liveFeed.subscribe(LiveFeedSubscriptionType.Price, 2885);
@@ -33,6 +34,7 @@ function handleData(data: LiveFeedCallback) {
 
 equityOrderUpdatesSubscription?.consume(handleData);
 // Similarly
+indexSubscription?.consume(handleData);
 fnoOrderUpdatesSubscription?.consume(handleData);
 fnoPositionUpdatesSubscription?.consume(handleData);
 priceSubscription?.consume(handleData);
@@ -45,6 +47,7 @@ marketDepthSubscription?.consume(handleData);
 
 ```typescript
 equityOrderUpdatesSubscription?.unsubscribe();
+indexSubscription?.unsubscribe();
 fnoOrderUpdatesSubscription?.unsubscribe();
 fnoPositionUpdatesSubscription?.unsubscribe();
 priceSubscription?.unsubscribe();

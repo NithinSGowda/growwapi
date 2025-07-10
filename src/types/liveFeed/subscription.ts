@@ -4,7 +4,7 @@ import { LiveFeedCallbackData, LiveFeedSubscriptionType } from '../..';
 export interface Subscription {
   natsSubscription: NatsSubscription;
   type: LiveFeedSubscriptionType;
-  exchangeToken?: number;
+  exchangeToken?: number | string;
   consume: (callback: SubscriptionCallback) => void;
   unsubscribe: () => void;
 }

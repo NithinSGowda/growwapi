@@ -4,7 +4,7 @@ import { Segment } from './enums/Segment';
 
 export interface InstructionsTypeParams extends BaseParams {
     exchange?: Exchange;
-    exchangeToken?: number;
+    exchangeToken?: number | string;
     tradingSymbol?: string;
     segment?: Segment;
     growwSymbol?: string;
@@ -19,7 +19,9 @@ export interface InstructionsTypeParams extends BaseParams {
     lotSize?: number;
     tickSize?: number;
     freezeQuantity?: number;
-    isReserved?: boolean;
-    buyAllowed?: boolean;
-    sellAllowed?: boolean;
+    isReserved?: number;
+    buyAllowed?: number;
+    sellAllowed?: number;
+    internalTradingSymbol?: string;
+    isIntraday?: number;
 }

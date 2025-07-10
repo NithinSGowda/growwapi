@@ -1,4 +1,5 @@
 import { LiveFeedMarketDepth, LiveFeedOrderUpdate, LiveFeedPositionUpdate, LiveFeedPrice } from '../../types';
+import { LiveFeedIndex } from '../../types/liveFeed/LiveFeedIndex';
 import {
   LiveFeedMarketDepthDecoder,
   LiveFeedOrderUpdatesDecoder,
@@ -11,6 +12,11 @@ const toObjectOptions = { longs: Number, enums: String, defaults: true, arrays: 
 export function PriceDecoder(data: Uint8Array): LiveFeedPrice {
   const decoded = LiveFeedPriceDecoder.decode(data);
   return LiveFeedPriceDecoder.toObject(decoded, toObjectOptions) as LiveFeedPrice;
+}
+
+export function IndexDecoder(data: Uint8Array): LiveFeedIndex {
+  const decoded = LiveFeedPriceDecoder.decode(data);
+  return LiveFeedPriceDecoder.toObject(decoded, toObjectOptions) as LiveFeedIndex;
 }
 
 export function MarketDepthDecoder(data: Uint8Array): LiveFeedMarketDepth {

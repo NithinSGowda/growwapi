@@ -19,7 +19,7 @@ export class LiveFeed {
     }
   }
 
-  async subscribe(type: LiveFeedSubscriptionType, exchangeToken?: number): Promise<Subscription | undefined> {
+  async subscribe(type: LiveFeedSubscriptionType, exchangeToken?: number | string): Promise<Subscription | undefined> {
     const subscriptionId = this.connection?.credentials.subscriptionId;
     if (!subscriptionId) {
       console.error('Subscription ID is not available. Please connect first.');

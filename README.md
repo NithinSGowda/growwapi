@@ -71,7 +71,7 @@ const Groww = new GrowwAPI();
 
 ## 📚 Examples
 
-After connecting and authenticating, you can explore detailed usage for each feature in the [examples directory](./examples/)
+Once your environment is set up and the SDK is initialized, see the [examples directory](./examples/) for detailed usage of each feature:
 
 - [Order Management](./examples/order.md)
 - [Holdings](./examples/holdings.md)
@@ -83,6 +83,12 @@ After connecting and authenticating, you can explore detailed usage for each fea
 - [Positions](./examples/positions.md)
 
 Each example demonstrates real-world usage and best practices for the respective module.
+
+---
+
+### Advanced Usage
+
+- [Authentication](./examples/auth.md)
 
 ---
 
