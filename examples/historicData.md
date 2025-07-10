@@ -14,7 +14,7 @@ startDate.setMonth(startDate.getMonth() - 2); // 2 months ago
 const startTime = startDate.getTime();
 const endTime = endDate.getTime();
 
-const data = await Groww.historicData.get({
+const data = await groww.historicData.get({
   exchange: Exchange.NSE,
   segment: Segment.CASH,
   tradingSymbol: 'RELIANCE',

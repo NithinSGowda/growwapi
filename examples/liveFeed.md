@@ -19,6 +19,7 @@ const equityOrderUpdatesSubscription = await liveFeed.subscribe(LiveFeedSubscrip
 const fnoOrderUpdatesSubscription = await liveFeed.subscribe(LiveFeedSubscriptionType.FnoOrderUpdates);
 const fnoPositionUpdatesSubscription = await liveFeed.subscribe(LiveFeedSubscriptionType.FnoPositionUpdates);
 const priceSubscription = await liveFeed.subscribe(LiveFeedSubscriptionType.Price, 2885);
+const indexSubscription = await liveFeed.subscribe(LiveFeedSubscriptionType.Index, 'NIFTY');
 const marketDepthSubscription = await liveFeed.subscribe(LiveFeedSubscriptionType.MarketDepth, 2885);
 ```
 
@@ -36,6 +37,7 @@ equityOrderUpdatesSubscription?.consume(handleData);
 fnoOrderUpdatesSubscription?.consume(handleData);
 fnoPositionUpdatesSubscription?.consume(handleData);
 priceSubscription?.consume(handleData);
+indexSubscription?.consume(handleData);
 marketDepthSubscription?.consume(handleData);
 ```
 
@@ -48,6 +50,7 @@ equityOrderUpdatesSubscription?.unsubscribe();
 fnoOrderUpdatesSubscription?.unsubscribe();
 fnoPositionUpdatesSubscription?.unsubscribe();
 priceSubscription?.unsubscribe();
+indexSubscription?.unsubscribe();
 marketDepthSubscription?.unsubscribe();
 ```
 

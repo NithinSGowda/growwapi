@@ -7,7 +7,7 @@ This example demonstrates how to use the `GrowwAPI` NodeJS SDK to fetch margin d
 ## 1. Get Margin Details
 
 ```typescript
-const marginDetails = await Groww.margins.details();
+const marginDetails = await groww.margins.details();
 console.log('Margin Details:', marginDetails);
 ```
 
@@ -16,7 +16,7 @@ console.log('Margin Details:', marginDetails);
 ## 2. Calculate Required Margin for a Position
 
 ```typescript
-const required = await Groww.margins.requiredForOrder({
+const required = await groww.margins.requiredForOrder({
   tradingSymbol: 'WIPRO',
   quantity: 5,
   price: 450,

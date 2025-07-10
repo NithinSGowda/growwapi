@@ -15,6 +15,8 @@ export function subscriptionTypeParser(type: LiveFeedSubscriptionType): string {
   switch (type) {
   case LiveFeedSubscriptionType.Price:
     return 'price';
+  case LiveFeedSubscriptionType.Index:
+    return 'indices';
   case LiveFeedSubscriptionType.MarketDepth:
     return 'book';
   default:
@@ -33,6 +35,14 @@ export function liveUpdatesParser(type: string, subscriptionId: string): string 
   default:
     throw new Error(`Unknown subscription type: ${type}`);
   }
+}
+
+export function liveIndexParser(type: LiveFeedSubscriptionType, instruction: InstructionsTypeParams): string {
+  const exchange = instruction.exchange?.toLowerCase();
+  const token = instruction.exchangeToken;
+  const typeString = subscriptionTypeParser(type);
+
+  return `/ld/${typeString}/${exchange}/price.${token}`;
 }
 
 export function liveMarketParser(type: LiveFeedSubscriptionType, instruction: InstructionsTypeParams): string {

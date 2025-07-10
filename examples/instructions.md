@@ -7,7 +7,7 @@ This example demonstrates how to use the `GrowwAPI` NodeJS SDK to fetch instrume
 ## 1. Get All Instructions
 
 ```typescript
-const data = await Groww.instructions.getInstructions();
+const data = await groww.instructions.getInstructions();
 
 console.log('Preview Content:', data.fileContent.slice(0, 1000));
 ```
@@ -17,7 +17,7 @@ console.log('Preview Content:', data.fileContent.slice(0, 1000));
 ## 2. Get Filtered Instructions
 
 ```typescript
-const filtered = await Groww.instructions.getFilteredInstructions({
+const filtered = await groww.instructions.getFilteredInstructions({
   exchangeToken: 2885,
 });
 
