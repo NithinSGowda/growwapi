@@ -19,7 +19,6 @@ growwapi is a NodeJS SDK for Groww trading APIs. The library provides functional
 
 ## 🚀 Features
 
-- **Authentication**: Secure API access with API key and TOTP
 - **Live Feed**: Real-time data streaming for market prices
 - **Historic Data**: Access to historical market data
 - **Holdings**: Fetch user portfolio holdings
@@ -28,6 +27,7 @@ growwapi is a NodeJS SDK for Groww trading APIs. The library provides functional
 - **Margins**: Retrieve margin details and calculate margins required for orders
 - **Orders**: Create, modify, cancel, and fetch order details
 - **Positions**: Fetch user positions and trading symbol details
+- **Authentication**: Secure API access with API key and TOTPrat
 
 ---
 
