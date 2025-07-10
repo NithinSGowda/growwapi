@@ -71,7 +71,7 @@ const Groww = new GrowwAPI();
 
 ## 📚 Examples
 
-Once your environment is set up and the SDK is initialized, see the [examples directory](./examples/) for detailed usage of each feature:
+Once your environment is set up and the SDK is initialized, you can explore detailed usage for each feature in the [examples directory](./examples/)
 
 - [Order Management](./examples/order.md)
 - [Holdings](./examples/holdings.md)
