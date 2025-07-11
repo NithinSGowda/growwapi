@@ -1,3 +1,3 @@
-import { LiveFeedMarketDepth, LiveFeedOrderUpdate, LiveFeedPositionUpdate, LiveFeedPrice } from '..';
+import { LiveFeedIndex, LiveFeedMarketDepth, LiveFeedOrderUpdate, LiveFeedPositionUpdate, LiveFeedPrice } from '..';
 
-export type LiveFeedCallbackData = LiveFeedPrice | LiveFeedMarketDepth | LiveFeedOrderUpdate | LiveFeedPositionUpdate
+export type LiveFeedCallbackData = LiveFeedPrice | LiveFeedMarketDepth | LiveFeedIndex | LiveFeedOrderUpdate | LiveFeedPositionUpdate
