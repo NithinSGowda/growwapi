@@ -1,6 +1,6 @@
 {
   "name": "growwapi",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "NodeJS SDK for Groww trading APIs",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
