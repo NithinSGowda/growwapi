@@ -1,0 +1,25 @@
+growwapi SDK
+
+Copyright 2025 Nithin S and Kokila K N
+
+This software is licensed under the Apache License, Version 2.0.
+See the LICENSE file for full license terms.
+
+---
+
+Trademark & Attribution Notice:
+
+growwapi is an independent, third-party SDK built to interact with publicly available APIs from Groww (Groww Invest Tech Pvt. Ltd.).
+
+This project is **not affiliated with, endorsed by, or officially connected with Groww or its subsidiaries.**  
+“Groww” is a registered trademark of Groww Invest Tech Pvt. Ltd.  
+All other product and company names mentioned are trademarks or registered trademarks of their respective holders.
+
+The use of the name “Groww” in this project is purely descriptive and is intended only to refer to the target API it supports.
+
+---
+
+Modifications & Contributions:
+
+This software may include modifications from its original form.  
+If redistributed or modified, please retain this NOTICE and acknowledge changes clearly as required under Apache 2.0 Section 4(d).
