@@ -47,13 +47,25 @@ async function downloadCSVToFile(url: string, filePath: string): Promise<void> {
   const writer = fs.createWriteStream(filePath);
   const reader = response.body.getReader();
 
-  while (true) {
-    const { done, value } = await reader.read();
-    if (done) break;
-    writer.write(Buffer.from(value));
-  }
+  return new Promise((resolve, reject) => {
+    writer.on('finish', resolve);
+    writer.on('error', reject);
 
-  writer.end();
+    (async () => {
+      try {
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done)
+            break;
+          writer.write(Buffer.from(value));
+        }
+        writer.end();
+      } catch (error) {
+        writer.destroy();
+        reject(error);
+      }
+    })();
+  });
 }
 
 export async function fetchCSV(url: string, ttl: number = FILECACHE_TTL): Promise<CachedCSVResult> {
